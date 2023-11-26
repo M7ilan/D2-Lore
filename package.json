@@ -1,0 +1,40 @@
+{
+	"name": "d2lore",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"rebuild": "next build && next start",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@heroicons/react": "latest",
+		"bungie-api-ts": "^5.0.0",
+		"clsx": "latest",
+		"framer-motion": "^10.16.5",
+		"idb-keyval": "^6.2.1",
+		"next": "latest",
+		"next-themes": "latest",
+		"react": "latest",
+		"react-dom": "latest",
+		"react-hot-toast": "latest",
+		"react-icons": "latest",
+		"react-syntax-highlighter": "latest",
+		"sharp": "latest"
+	},
+	"devDependencies": {
+		"@types/node": "latest",
+		"@types/react": "latest",
+		"@types/react-dom": "latest",
+		"@types/react-syntax-highlighter": "latest",
+		"autoprefixer": "latest",
+		"eslint": "latest",
+		"eslint-config-next": "latest",
+		"postcss": "latest",
+		"prettier": "latest",
+		"tailwindcss": "latest",
+		"typescript": "latest"
+	}
+}
