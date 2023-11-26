@@ -16,12 +16,12 @@ export default function LoreRecordContent() {
 
 	if (!recordDiff) return null;
 	return (
-		<div className="grid grid-rows-[min-content_1fr] lg:pl-8 lg:border-l border-white border-opacity-10 gap-8 duration-0">
-			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.3 }} className="center py-6 border-y border-white border-opacity-20 title text-white !text-opacity-80 duration-0">
-				{title}
+		<div className="grid grid-rows-[min-content_1fr] lg:pl-8 lg:border-l border-default border-opacity-10 gap-8">
+			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.3 }} className="duration-0">
+				<div className="center py-6 border-y border-default border-opacity-20 title text-default !text-opacity-80">{title}</div>
 			</motion.div>
-			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.3 }} className="whitespace-pre-line text-white !text-opacity-80 duration-0">
-				{description}
+			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.3 }} className="duration-0">
+				<div className="whitespace-pre-line text-default !text-opacity-80">{description}</div>
 			</motion.div>
 		</div>
 	);

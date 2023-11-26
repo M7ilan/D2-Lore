@@ -78,8 +78,12 @@ code {
 	@apply bg-OpenColor-gray-1 dark:bg-OpenColor-gray-8 p-1 rounded-md;
 }
 
-.text-defualt {
+.text-default {
 	@apply text-OpenColor-gray-7 dark:text-OpenColor-gray-1;
+}
+
+.text-default-reverse {
+	@apply text-OpenColor-gray-1 dark:text-OpenColor-gray-7;
 }
 
 .text-1 {
@@ -126,6 +130,14 @@ hr {
 	@apply relative top-0 hover:-top-1 duration-150 cursor-pointer;
 }
 
+.border-default {
+	@apply border-OpenColor-gray-3 dark:border-OpenColor-gray-8;
+}
+
+.border-left {
+	@apply border-l-2 border-main pl-8;
+}
+
 .success-border {
 	@apply !border-OpenColor-green-6;
 }
@@ -158,10 +170,6 @@ hr {
 	@apply w-2 h-2 rounded-full;
 }
 
-.border-left {
-	@apply border-l-2 border-main pl-8;
-}
-
 .active {
 	@apply border-main dark:border-OpenColor-gray-0;
 }
@@ -178,7 +186,11 @@ hr {
 	@apply !bg-white dark:!bg-OpenColor-gray-9;
 }
 
-.ring-defualt {
+.bg-default-reverse {
+	@apply !bg-OpenColor-gray-9 dark:!bg-white;
+}
+
+.ring-default {
 	@apply hover:ring-2 ring-2 cursor-pointer ring-main ring-offset-4 ring-transparent dark:ring-transparent hover:ring-main hover:dark:ring-current hover:ring-offset-2 dark:ring-offset-OpenColor-gray-9 focus:ring-main focus:dark:ring-current;
 }
 
@@ -187,7 +199,7 @@ hr {
 }
 
 .book {
-	@apply ring-defualt;
+	@apply ring-default;
 }
 
 .active-book {
@@ -195,17 +207,17 @@ hr {
 }
 
 .record {
-	@apply center w-10 h-10 bg-1 ring-defualt border border-white border-opacity-50 text-1 !bg-white !bg-opacity-10 hover:!bg-opacity-25;
+	@apply center w-10 h-10 bg-1 ring-default border border-default text-1 !bg-OpenColor-gray-9/0 dark:!bg-white/0 hover:!bg-OpenColor-gray-9/10 dark:hover:!bg-white/10;
 }
 
 .active-record {
-	@apply !bg-opacity-25 active-ring;
+	@apply !bg-opacity-25 active-ring !bg-OpenColor-gray-9/10 dark:!bg-white/10;
 }
 
 .node {
-	@apply ring-defualt h-16 center p-3 border border-white border-opacity-50 opacity-50 hover:opacity-100 !bg-white !bg-opacity-0 hover:!bg-opacity-25;
+	@apply ring-default h-16 center p-3 border border-default !bg-OpenColor-gray-9/0 dark:!bg-white/0 hover:!bg-OpenColor-gray-9/10 dark:hover:!bg-white/10 opacity-50 hover:opacity-100;
 }
 
 .active-node {
-	@apply !opacity-100 !bg-opacity-25 active-ring;
+	@apply !opacity-100 !bg-opacity-25 !bg-OpenColor-gray-9/10 dark:!bg-white/10 active-ring;
 }

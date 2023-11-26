@@ -14,7 +14,7 @@ export default function LoreBookContent() {
 	if (!bookDiff) return null;
 	return (
 		<div className="grid gap-8 content-start">
-			<div className="center py-6 border-y border-white border-opacity-20 title">{bookDiff.displayProperties.name}</div>
+			<div className="center py-6 border-y border-default title">{bookDiff.displayProperties.name}</div>
 			<Image priority src={`https://www.bungie.net${bookDiff.displayProperties.iconSequences[1].frames[0]}`} className="hidden lg:block shadow-lg" width={1436} height={1840} alt="Book" />
 			<div className="grid grid-cols-[repeat(auto-fill,40px)] w-full justify-start gap-2">
 				{bookDiff.children.records.map((recordId, index) => {

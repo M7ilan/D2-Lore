@@ -11,7 +11,7 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { useLore } from "@/src/providers/LoreProvider";
 import Socials from "@/src/components/Socials";
-// import SwitchThemeButton from "@/src/components/SwitchThemeButton";
+import SwitchThemeButton from "@/src/components/SwitchThemeButton";
 
 export default function HomePage() {
 	const { manifest } = useManifest();
@@ -62,14 +62,14 @@ export default function HomePage() {
 		<div className="grid grid-cols-[1fr] grid-rows-[min-content_min-content_1fr] md:grid-cols-[320px_2fr] md:grid-rows-[min-content_1fr] md:gap-x-8 gap-y-8 md:gap-y-2">
 			<div className="flex md:col-span-2 justify-between items-center">
 				<div className="flex items-center gap-2 title">
-					<Image priority src="/Lore Logo.png" className="w-16 h-16" width={800} height={800} alt="Logo" />
+					<Image priority src="/Lore Logo.png" className="w-12 h-12 invert dark:invert-0" width={800} height={800} alt="Logo" />
 					<div>
 						Lore <span className="opacity-50 font-normal">{"// " + manifest?.DestinyPresentationNodeDefinition[node]?.displayProperties?.name}</span>
 					</div>
 				</div>
 				<div className="flex gap-2">
 					<Socials />
-					{/* <SwitchThemeButton /> */}
+					<SwitchThemeButton />
 				</div>
 			</div>
 			<div className="grid grid-rows-[64px_min-content] gap-8">
