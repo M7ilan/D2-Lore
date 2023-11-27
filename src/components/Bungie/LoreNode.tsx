@@ -1,5 +1,3 @@
-// src\components\Bungie\LoreNode.tsx
-
 import Image from "next/image";
 import clsx from "clsx";
 import { useManifest } from "@/src/providers/ManifestProvider";

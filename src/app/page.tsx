@@ -1,5 +1,3 @@
-// src\app\page.tsx
-
 "use client";
 
 import LoreBook from "@/src/components/Bungie/LoreBook";

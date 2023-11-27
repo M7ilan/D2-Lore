@@ -1,5 +1,3 @@
-// src\components\Bungie\LoreRecordContent.tsx
-
 import { useLore } from "@/src/providers/LoreProvider";
 import { useManifest } from "@/src/providers/ManifestProvider";
 import { motion } from "framer-motion";
