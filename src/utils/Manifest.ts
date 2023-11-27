@@ -1,6 +1,7 @@
-import { DestinyManifest, AllDestinyManifestComponents } from "bungie-api-ts/destiny2";
+import { DestinyManifest, DestinyPresentationNodeDefinition, DestinyRecordDefinition, DestinyLoreDefinition } from "bungie-api-ts/destiny2";
 import { DestinyManifestResponse } from "@/src/types/DestinyManifestResponse";
 import { get, set } from "idb-keyval";
+import { NeededManifestComponents } from "../types/NeededManifestComponents";
 
 const BUNGIE_API_URL = "https://www.bungie.net/Platform/Destiny2";
 
@@ -18,13 +19,13 @@ export async function getDestinyManifest(): Promise<DestinyManifest> {
 	return json.Response;
 }
 
-export async function getManifest(): Promise<AllDestinyManifestComponents> {
-	console.log("Getting Manifest...");
-	const manifest = await getDestinyManifest();
-	const url = `https://www.bungie.net${manifest.jsonWorldContentPaths.en}`;
-	const json = await fetchJSON<AllDestinyManifestComponents>(url);
-	console.log("Got Manifest");
-	return json;
+async function fetchManifestComponent<T>(componentPath: string): Promise<T> {
+	const url = `https://www.bungie.net${componentPath}`;
+	return fetchJSON<T>(url);
+}
+
+async function storeManifestData(manifestComponents: NeededManifestComponents): Promise<void> {
+	await set("Manifest", manifestComponents);
 }
 
 export async function getManifestVersion(): Promise<string> {
@@ -42,22 +43,24 @@ export async function isManifestUpToDate(): Promise<boolean> {
 	return storedVersion === currentVersion;
 }
 
-async function storeManifestData(manifest: AllDestinyManifestComponents): Promise<void> {
-	await set("Manifest", {
-		DestinyPresentationNodeDefinition: manifest.DestinyPresentationNodeDefinition,
-		DestinyRecordDefinition: manifest.DestinyRecordDefinition,
-		DestinyLoreDefinition: manifest.DestinyLoreDefinition,
-	});
-}
-
 export async function storeManifest(): Promise<boolean> {
 	console.log("Storing Manifest...");
 	try {
-		const currentManifest = await get("Manifest");
+		const currentManifest = await get<NeededManifestComponents>("Manifest");
 		if (!currentManifest || !(await isManifestUpToDate())) {
 			console.log("Updating Manifest...");
-			const manifest = await getManifest();
-			await storeManifestData(manifest);
+			const manifest = await getDestinyManifest();
+			const components = manifest.jsonWorldComponentContentPaths.en;
+
+			const presentationNode = await fetchManifestComponent<DestinyPresentationNodeDefinition>(components["DestinyPresentationNodeDefinition"]);
+			const record = await fetchManifestComponent<DestinyRecordDefinition>(components["DestinyRecordDefinition"]);
+			const lore = await fetchManifestComponent<DestinyLoreDefinition>(components["DestinyLoreDefinition"]);
+
+			await storeManifestData({
+				DestinyPresentationNodeDefinition: presentationNode,
+				DestinyRecordDefinition: record,
+				DestinyLoreDefinition: lore,
+			});
 		}
 		console.log("Manifest Stored");
 		return true;
