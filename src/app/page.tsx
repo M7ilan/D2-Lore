@@ -57,7 +57,7 @@ export default function HomePage() {
 	return (
 		<div className="grid grid-cols-[1fr] grid-rows-[min-content_1fr] md:grid-cols-[320px_2fr] md:grid-rows-[1fr] md:gap-x-8 gap-y-2">
 			<div className="flex md:col-span-2 justify-between items-center">
-				<motion.div key={node} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2 title duration-0">
+				<motion.div key={`node-${node}`} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2 title duration-0">
 					<div className="opacity-50 font-normal">{manifest?.DestinyPresentationNodeDefinition[node]?.displayProperties?.name}</div>
 				</motion.div>
 			</div>
@@ -66,12 +66,12 @@ export default function HomePage() {
 					<LoreNode />
 				</div>
 				<div className="grid grid-cols-[repeat(3,1fr)] gap-8">
-					<LoreBook key={node} />
+					<LoreBook key={`book-${node}`} />
 				</div>
 			</div>
 			<div className="grid grid-rows-[min-content_1fr] lg:grid-cols-[minmax(120px,360px)_minmax(320px,1fr)] gap-8 md:pl-8 md:border-l border-white border-opacity-10 duration-0">
-				<LoreBookContent key={book} />
-				<LoreRecordContent key={record} />
+				<LoreBookContent key={`bookcontent-${book}`} />
+				<LoreRecordContent key={`recordcontent-${record}`} />
 			</div>
 		</div>
 	);
