@@ -5,11 +5,9 @@ import LoreBookContent from "@/src/components/Bungie/LoreBookContent";
 import LoreNode from "@/src/components/Bungie/LoreNode";
 import LoreRecordContent from "@/src/components/Bungie/LoreRecordContent";
 import { useManifest } from "@/src/providers/ManifestProvider";
-import Image from "next/image";
 import { useEffect } from "react";
 import { useLore } from "@/src/providers/LoreProvider";
-import Socials from "@/src/components/Socials";
-import SwitchThemeButton from "@/src/components/SwitchThemeButton";
+import { motion } from "framer-motion";
 
 export default function HomePage() {
 	const { manifest } = useManifest();
@@ -57,18 +55,11 @@ export default function HomePage() {
 	}, [book]);
 
 	return (
-		<div className="grid grid-cols-[1fr] grid-rows-[min-content_min-content_1fr] md:grid-cols-[320px_2fr] md:grid-rows-[min-content_1fr] md:gap-x-8 gap-y-8 md:gap-y-2">
+		<div className="grid grid-cols-[1fr] grid-rows-[min-content_1fr] md:grid-cols-[320px_2fr] md:grid-rows-[1fr] md:gap-x-8 gap-y-2">
 			<div className="flex md:col-span-2 justify-between items-center">
-				<div className="flex items-center gap-2 title">
-					<Image priority src="/Lore Logo.png" className="w-12 h-12 invert dark:invert-0" width={800} height={800} alt="Logo" />
-					<div>
-						Lore <span className="opacity-50 font-normal">{"// " + manifest?.DestinyPresentationNodeDefinition[node]?.displayProperties?.name}</span>
-					</div>
-				</div>
-				<div className="flex gap-2">
-					<Socials />
-					<SwitchThemeButton />
-				</div>
+				<motion.div key={node} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2 title duration-0">
+					<div className="opacity-50 font-normal">{manifest?.DestinyPresentationNodeDefinition[node]?.displayProperties?.name}</div>
+				</motion.div>
 			</div>
 			<div className="grid grid-rows-[64px_min-content] gap-8">
 				<div className="grid grid-flow-col gap-2">

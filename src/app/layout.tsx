@@ -1,5 +1,5 @@
 import "./globals.css";
-// import Navbar from "@/src/components/Navbar";
+import Navbar from "@/src/components/Navbar";
 // import Footer from "@/src/components/Footer";
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 			<body className={`${font.className} bg-white dark:bg-OpenColor-gray-9 text-OpenColor-gray-7 dark:text-OpenColor-gray-1 antialiased`}>
 				<Toaster position="top-center" reverseOrder={false} />
 				<MainProvider>
-					{/* <Navbar /> */}
+					<Navbar />
 					<main className="mt-8 px-16 m-auto pb-[50px]">{children}</main>
 					{/* <Footer /> */}
 				</MainProvider>

@@ -1,18 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Logo from "./Logo";
 import clsx from "clsx";
 import SwitchThemeButton from "./SwitchThemeButton";
+import Socials from "./Socials";
 
 function NavbarElements() {
 	return (
 		<>
-			<Link href="/" className="btn-click">
-				Home
-			</Link>
-			<hr className="md:hidden w-full" />
+			<Socials />
 			<SwitchThemeButton />
 		</>
 	);
@@ -23,7 +20,7 @@ export default function Navbar() {
 
 	return (
 		<>
-			<div className="container-0 flex justify-between items-center mb-32">
+			<div className="container-0 flex justify-between items-center mb-8">
 				<Logo />
 				<div className="md:flex hidden gap-8 items-center">
 					<NavbarElements />
