@@ -9,9 +9,13 @@ import { useEffect } from "react";
 import { useLore } from "@/src/providers/LoreProvider";
 import { motion } from "framer-motion";
 
-export default function HomePage() {
+export default function HomePage({ params }: { params: { slug: number[] } }) {
 	const { manifest } = useManifest();
 	const { node, setNode, book, setBook, record, setRecord } = useLore();
+
+	const nodeSlug = params.slug?.[0] ?? 0;
+	const bookSlug = params.slug?.[1] ?? 0;
+	const recordSlug = params.slug?.[2] ?? 0;
 
 	const fetchFirstNode = () => {
 		const lore = manifest?.DestinyPresentationNodeDefinition[4077680549]; // Lore Definition
@@ -27,13 +31,35 @@ export default function HomePage() {
 	};
 
 	useEffect(() => {
-		if (manifest) {
+		if (manifest && !nodeSlug && !bookSlug && !recordSlug) {
 			const defaultNode = fetchFirstNode();
 			setNode(defaultNode);
 
 			const { firstBook, firstRecord } = fetchFirstBookAndRecord(defaultNode);
 			setBook(firstBook);
 			setRecord(firstRecord);
+		}
+
+		if (nodeSlug) {
+			setNode(nodeSlug);
+
+			if (bookSlug) {
+				setBook(bookSlug);
+				const firstRecordOfSelectedBook = manifest?.DestinyPresentationNodeDefinition[bookSlug]?.children?.records[0]?.recordHash ?? 0;
+				setRecord(firstRecordOfSelectedBook);
+
+				if (recordSlug) {
+					setTimeout(() => {
+						setRecord(recordSlug);
+					}, 100);
+				} else if (!bookSlug) {
+					setRecord(fetchFirstBookAndRecord(nodeSlug).firstRecord);
+				}
+			} else {
+				setBook(fetchFirstBookAndRecord(nodeSlug).firstBook);
+			}
+		} else {
+			setNode(fetchFirstNode());
 		}
 	}, [manifest]);
 
@@ -56,6 +82,13 @@ export default function HomePage() {
 
 	return (
 		<div className="grid grid-cols-[1fr] grid-rows-[min-content_1fr] md:grid-cols-[320px_2fr] md:grid-rows-[1fr] md:gap-x-8 gap-y-2">
+			<div>
+				{JSON.stringify({
+					nodeSlug,
+					bookSlug,
+					recordSlug,
+				})}
+			</div>
 			<div className="flex md:col-span-2 justify-between items-center">
 				<motion.div key={`node-${node}`} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2 title duration-0">
 					<div className="opacity-50 font-normal">{manifest?.DestinyPresentationNodeDefinition[node]?.displayProperties?.name}</div>
