@@ -1,1 +1,1 @@
-# D2Lore
+# D2-lore

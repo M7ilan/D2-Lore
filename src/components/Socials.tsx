@@ -6,7 +6,7 @@ export default function Socials({ size }: { size?: number }) {
 
 	return (
 		<div className="flex gap-2 text-left items-center">
-			<Link className="opacity-50 hover:opacity-100" target="_blank" href="https://github.com/M7ilan/D2Lore">
+			<Link className="opacity-50 hover:opacity-100" target="_blank" href="https://github.com/M7ilan/d2-lore">
 				<RiGithubFill style={{ height: customSize, width: customSize }} />
 			</Link>
 			<Link className="opacity-50 hover:opacity-100" target="_blank" href="https://discord.gg/86CAxYJ6NK">
