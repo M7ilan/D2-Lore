@@ -31,7 +31,7 @@ export default function LoreBook() {
 				return (
 					<motion.div key={index} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05, duration: 0.3 }} className="duration-0">
 						<div className={clsx("book", { "active-book": isActive })} onClick={() => handleOnClick(bookId.presentationNodeHash)}>
-							<Image onLoad={() => handleImageLoad(bookId.presentationNodeHash)} className={isImageLoaded[bookId.presentationNodeHash] ? "opacity-100" : "opacity-0"} priority src={`https://www.bungie.net${bookDefinition?.displayProperties.iconSequences[1].frames[0]}`} width={1436} height={1840} alt="Book" />
+							<Image unoptimized onLoad={() => handleImageLoad(bookId.presentationNodeHash)} className={isImageLoaded[bookId.presentationNodeHash] ? "opacity-100" : "opacity-0"} priority src={`https://www.bungie.net${bookDefinition?.displayProperties.iconSequences[1].frames[0]}`} width={1436} height={1840} alt="Book" />
 						</div>
 					</motion.div>
 				);

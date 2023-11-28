@@ -17,7 +17,7 @@ export default function LoreBookContent() {
 			<div id={`lore-book-title-[${book}]`} className="center py-6 border-y border-default title scroll-mt-8">
 				{bookDiff.displayProperties.name}
 			</div>
-			<Image priority src={`https://www.bungie.net${bookDiff.displayProperties.iconSequences[1].frames[0]}`} className={isImageLoaded[book] ? "hidden lg:block shadow-lg opacity-100" : "hidden lg:block shadow-lg opacity-0"} width={1436} height={1840} alt="Book" onLoad={() => handleImageLoad(book)} />
+			<Image unoptimized priority src={`https://www.bungie.net${bookDiff.displayProperties.iconSequences[1].frames[0]}`} className={isImageLoaded[book] ? "hidden lg:block shadow-lg opacity-100" : "hidden lg:block shadow-lg opacity-0"} width={1436} height={1840} alt="Book" onLoad={() => handleImageLoad(book)} />
 			<div className="grid grid-cols-[repeat(auto-fill,40px)] w-full justify-start gap-2">
 				{bookDiff.children.records.map((recordId, index) => {
 					const isActive = recordId.recordHash === record;
