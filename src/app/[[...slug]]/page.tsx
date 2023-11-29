@@ -8,6 +8,7 @@ import { useManifest } from "@/src/providers/ManifestProvider";
 import { useEffect } from "react";
 import { useLore } from "@/src/providers/LoreProvider";
 import { motion } from "framer-motion";
+import { fetchFirstBookAndRecord, fetchFirstNode } from "@/src/utils/NBRs";
 
 export default function HomePage({ params }: { params: { slug: number[] } }) {
 	const { manifest } = useManifest();
@@ -17,25 +18,12 @@ export default function HomePage({ params }: { params: { slug: number[] } }) {
 	const bookSlug = params.slug?.[1] ?? 0;
 	const recordSlug = params.slug?.[2] ?? 0;
 
-	const fetchFirstNode = () => {
-		const lore = manifest?.DestinyPresentationNodeDefinition[4077680549]; // Lore Definition
-		return lore?.children.presentationNodes[0].presentationNodeHash ?? 0;
-	};
-
-	const fetchFirstBookAndRecord = (node: number) => {
-		const newNode = manifest?.DestinyPresentationNodeDefinition[node];
-		const firstBook = newNode?.children.presentationNodes[0].presentationNodeHash ?? 0;
-		const firstRecord = (firstBook && manifest?.DestinyPresentationNodeDefinition[firstBook].children.records[0].recordHash) ?? 0;
-
-		return { firstBook, firstRecord };
-	};
-
 	useEffect(() => {
 		if (manifest && !nodeSlug && !bookSlug && !recordSlug) {
-			const defaultNode = fetchFirstNode();
+			const defaultNode = fetchFirstNode(manifest);
 			setNode(defaultNode);
 
-			const { firstBook, firstRecord } = fetchFirstBookAndRecord(defaultNode);
+			const { firstBook, firstRecord } = fetchFirstBookAndRecord(manifest, defaultNode);
 			setBook(firstBook);
 			setRecord(firstRecord);
 		}
@@ -51,21 +39,21 @@ export default function HomePage({ params }: { params: { slug: number[] } }) {
 				if (recordSlug) {
 					setTimeout(() => {
 						setRecord(recordSlug);
-					}, 100);
+					}, 10);
 				} else if (!bookSlug) {
-					setRecord(fetchFirstBookAndRecord(nodeSlug).firstRecord);
+					setRecord(fetchFirstBookAndRecord(manifest, nodeSlug).firstRecord);
 				}
 			} else {
-				setBook(fetchFirstBookAndRecord(nodeSlug).firstBook);
+				setBook(fetchFirstBookAndRecord(manifest, nodeSlug).firstBook);
 			}
 		} else {
-			setNode(fetchFirstNode());
+			setNode(fetchFirstNode(manifest));
 		}
 	}, [manifest]);
 
 	useEffect(() => {
 		if (node) {
-			const { firstBook, firstRecord } = fetchFirstBookAndRecord(node);
+			const { firstBook, firstRecord } = fetchFirstBookAndRecord(manifest, node);
 			setBook(firstBook);
 			setRecord(firstRecord);
 		}
