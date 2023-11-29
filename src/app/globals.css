@@ -198,12 +198,20 @@ hr {
 	@apply ring-2 ring-main dark:ring-current ring-offset-2;
 }
 
+.node {
+	@apply ring-default h-16 center p-3 border border-default !bg-OpenColor-gray-9/0 dark:!bg-white/0 hover:!bg-OpenColor-gray-9/10 dark:hover:!bg-white/10 opacity-50 hover:opacity-100;
+}
+
+.active-node {
+	@apply !opacity-100 !bg-opacity-25 !bg-OpenColor-gray-9/10 dark:!bg-white/10 active-ring;
+}
+
 .book {
-	@apply ring-default;
+	@apply ring-default rounded-md overflow-hidden;
 }
 
 .active-book {
-	@apply active-ring;
+	@apply border-b-4 mt-2 border-OpenColor-gray-7 dark:border-OpenColor-gray-1 rounded-md;
 }
 
 .record {
@@ -212,12 +220,4 @@ hr {
 
 .active-record {
 	@apply !bg-opacity-25 active-ring !bg-OpenColor-gray-9/10 dark:!bg-white/10;
-}
-
-.node {
-	@apply ring-default h-16 center p-3 border border-default !bg-OpenColor-gray-9/0 dark:!bg-white/0 hover:!bg-OpenColor-gray-9/10 dark:hover:!bg-white/10 opacity-50 hover:opacity-100;
-}
-
-.active-node {
-	@apply !opacity-100 !bg-opacity-25 !bg-OpenColor-gray-9/10 dark:!bg-white/10 active-ring;
 }
