@@ -199,7 +199,7 @@ hr {
 }
 
 .node {
-	@apply ring-default h-16 center p-3 border border-default !bg-OpenColor-gray-9/0 dark:!bg-white/0 hover:!bg-OpenColor-gray-9/10 dark:hover:!bg-white/10 opacity-50 hover:opacity-100;
+	@apply ring-default h-16 rounded-md center p-3 border border-default !bg-OpenColor-gray-9/0 dark:!bg-white/0 hover:!bg-OpenColor-gray-9/10 dark:hover:!bg-white/10 opacity-50 hover:opacity-100;
 }
 
 .active-node {
@@ -215,7 +215,7 @@ hr {
 }
 
 .record {
-	@apply center w-10 h-10 bg-1 ring-default border border-default text-1 !bg-OpenColor-gray-9/0 dark:!bg-white/0 hover:!bg-OpenColor-gray-9/10 dark:hover:!bg-white/10;
+	@apply center w-10 h-10 rounded-md bg-1 ring-default border border-default text-1 !bg-OpenColor-gray-9/0 dark:!bg-white/0 hover:!bg-OpenColor-gray-9/10 dark:hover:!bg-white/10;
 }
 
 .active-record {
