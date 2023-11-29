@@ -1,9 +1,9 @@
 "use client";
 
-import LoreBook from "@/src/components/Bungie/LoreBook";
-import LoreBookContent from "@/src/components/Bungie/LoreBookContent";
-import LoreNode from "@/src/components/Bungie/LoreNode";
-import LoreRecordContent from "@/src/components/Bungie/LoreRecordContent";
+import LoreBook from "@/src/components/Lore/LoreBook";
+import LoreBookContent from "@/src/components/Lore/LoreBookContent";
+import LoreNode from "@/src/components/Lore/LoreNode";
+import LoreRecordContent from "@/src/components/Lore/LoreRecordContent";
 import { useManifest } from "@/src/providers/ManifestProvider";
 import { useEffect } from "react";
 import { useLore } from "@/src/providers/LoreProvider";
