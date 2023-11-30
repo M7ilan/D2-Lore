@@ -17,14 +17,16 @@ export default function LoreBookContent() {
 			<div id={`lore-book-title-[${book}]`} className="center py-6 border-y border-default title scroll-mt-8">
 				{bookDiff.displayProperties.name}
 			</div>
-			<Image quality={100} priority src={`https://www.bungie.net${bookDiff.displayProperties.iconSequences[1].frames[0]}`} className={isImageLoaded[book] ? "hidden lg:block shadow-lg opacity-100" : "hidden lg:block shadow-lg opacity-0"} width={1436} height={1840} alt="Book" onLoad={() => handleImageLoad(book)} />
+			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.3 }} className="duration-0">
+				<Image quality={100} priority src={`https://www.bungie.net${bookDiff.displayProperties.iconSequences[1].frames[0]}`} className={isImageLoaded[book] ? "hidden lg:block shadow-lg opacity-100" : "hidden lg:block shadow-lg opacity-0"} width={1436} height={1840} alt="Book" onLoad={() => handleImageLoad(book)} />
+			</motion.div>
 			<div className="grid grid-cols-[repeat(auto-fill,40px)] w-full justify-start gap-2">
 				{bookDiff.children.records.map((recordId, index) => {
 					const isActive = recordId.recordHash == record;
 
 					const handleOnClick = () => {
 						setRecord(recordId.recordHash);
-						window.history.replaceState({}, "", `/${node}/${book}/${recordId.recordHash}`);
+						window.history.replaceState({}, "", `/books/${node}/${book}/${recordId.recordHash}`);
 					};
 
 					return (

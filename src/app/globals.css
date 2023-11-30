@@ -199,7 +199,7 @@ hr {
 }
 
 .node {
-	@apply ring-default h-16 rounded-md center p-3 border border-default !bg-OpenColor-gray-9/0 dark:!bg-white/0 hover:!bg-OpenColor-gray-9/10 dark:hover:!bg-white/10 opacity-50 hover:opacity-100;
+	@apply ring-default rounded-md center p-2 border border-default !bg-OpenColor-gray-9/0 dark:!bg-white/0 hover:!bg-OpenColor-gray-9/10 dark:hover:!bg-white/10 opacity-50 hover:opacity-100;
 }
 
 .active-node {

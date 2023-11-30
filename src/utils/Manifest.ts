@@ -40,6 +40,7 @@ export async function isManifestUpToDate(): Promise<boolean> {
 	console.log("Checking if Manifest is up to date...");
 	const storedVersion = localStorage.getItem("manifestVersion");
 	const currentVersion = await getManifestVersion();
+	console.log("isManifestUpToDate: ", storedVersion === currentVersion);
 	return storedVersion === currentVersion;
 }
 

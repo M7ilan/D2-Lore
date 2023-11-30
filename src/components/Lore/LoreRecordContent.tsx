@@ -17,7 +17,7 @@ export default function LoreRecordContent() {
 	const [isLinkCopied, setIsLinkCopied] = useState(false);
 
 	const handleShareClick = () => {
-		const currentUrl = `${window.location.origin}/${node}/${book}/${record}`;
+		const currentUrl = `${window.location.origin}/books/${node}/${book}/${record}`;
 		navigator.clipboard.writeText(currentUrl);
 		setIsLinkCopied(true);
 

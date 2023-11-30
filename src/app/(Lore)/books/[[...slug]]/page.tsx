@@ -10,7 +10,7 @@ import { useLore } from "@/src/providers/LoreProvider";
 import { motion } from "framer-motion";
 import { fetchFirstBookAndRecord, fetchFirstNode } from "@/src/utils/NBRs";
 
-export default function HomePage({ params }: { params: { slug: number[] } }) {
+export default function LorePage({ params }: { params: { slug: number[] } }) {
 	const { manifest } = useManifest();
 	const { node, setNode, book, setBook, record, setRecord } = useLore();
 

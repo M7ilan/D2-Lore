@@ -31,7 +31,7 @@ export default function LoreBook() {
 
 				const handleOnClick = () => {
 					setBook(bookId.presentationNodeHash);
-					window.history.replaceState({}, "", `/${node}/${bookId.presentationNodeHash}`);
+					window.history.replaceState({}, "", `/books/${node}/${bookId.presentationNodeHash}`);
 				};
 
 				return (
