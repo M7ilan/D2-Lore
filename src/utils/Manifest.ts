@@ -1,6 +1,6 @@
 import { DestinyManifest, DestinyPresentationNodeDefinition, DestinyRecordDefinition, DestinyLoreDefinition } from "bungie-api-ts/destiny2";
 import { DestinyManifestResponse } from "@/src/types/DestinyManifestResponse";
-import { get, set } from "idb-keyval";
+import { del, get, set } from "idb-keyval";
 import { NeededManifestComponents } from "../types/NeededManifestComponents";
 
 const BUNGIE_API_URL = "https://www.bungie.net/Platform/Destiny2";
@@ -74,6 +74,10 @@ export async function initializeManifest() {
 	console.log("Initializing Manifest...");
 	await storeManifest();
 	console.log("Manifest Initialized");
+}
+
+export default async function clearManifest() {
+	await del("Manifest");
 }
 
 export async function isValidManifest(): Promise<boolean> {
