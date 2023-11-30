@@ -22,7 +22,8 @@
 		"react-hot-toast": "latest",
 		"react-icons": "latest",
 		"react-syntax-highlighter": "latest",
-		"sharp": "latest"
+		"sharp": "latest",
+		"@vercel/analytics": "latest"
 	},
 	"devDependencies": {
 		"@types/node": "latest",
