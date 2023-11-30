@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import LoadingProvider from "./LoadingProvider";
 import LoreProvider from "./LoreProvider";
 import ManifestProvider from "./ManifestProvider";
@@ -10,6 +11,7 @@ export default function MainProvider({ children }: { children: React.ReactNode }
 				<LoadingProvider />
 				<LoreProvider>{children}</LoreProvider>
 			</ManifestProvider>
+            <Analytics />
 		</ThemeProvider>
 	);
 }
