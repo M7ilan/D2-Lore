@@ -40,6 +40,12 @@ export default function LoreRecordContent() {
 			savedBookmarks[record] = { node, book, record };
 		}
 		localStorage.setItem("bookmarks", JSON.stringify(savedBookmarks));
+
+		window.dispatchEvent(
+			new CustomEvent("localStorageChange", {
+				detail: { bookmarks: savedBookmarks },
+			}),
+		);
 	};
 
 	const handleBookmarkClick = () => {

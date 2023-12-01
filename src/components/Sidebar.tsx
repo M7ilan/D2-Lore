@@ -4,7 +4,6 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HiOutlineBookmark } from "react-icons/hi";
 
 export default function Sidebar() {
 	const path = usePathname();
@@ -18,9 +17,6 @@ export default function Sidebar() {
 				</Link>
 				<Link href={"/armor"} className={clsx("node h-16", { "active-node": isActive("/armor") })}>
 					<Image className="max-w-14 max-h-14 object-contain invert dark:invert-0" alt="Armors" src="/Armors.png" width={80} height={80} />
-				</Link>
-				<Link href={"/bookmark"} className={clsx("node h-16", { "active-node": isActive("/bookmark") })}>
-					<HiOutlineBookmark className="max-w-12 max-h-12 w-full h-full object-contain" />
 				</Link>
 			</div>
 		</div>

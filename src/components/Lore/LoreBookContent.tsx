@@ -4,12 +4,34 @@ import { useManifest } from "@/src/providers/ManifestProvider";
 import { motion } from "framer-motion";
 import { useLore } from "@/src/providers/LoreProvider";
 import useImageLoad from "@/src/hooks/onImageLoad";
+import { useEffect, useState } from "react";
+import { Bookmark } from "@/src/types/Bookmark";
 
 export default function LoreBookContent() {
 	const { manifest } = useManifest();
 	const { node, book, record, setRecord } = useLore();
 	const bookDiff = manifest?.DestinyPresentationNodeDefinition[book];
 	const { isImageLoaded, handleImageLoad } = useImageLoad();
+	const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
+
+	useEffect(() => {
+		const savedBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}");
+		const values: Bookmark[] = Object.values(savedBookmarks);
+		setBookmarks(values);
+
+		const handleLocalStorageChange = (event: any) => {
+			if (event.detail && event.detail.bookmarks) {
+				const values: Bookmark[] = Object.values(event.detail.bookmarks);
+				setBookmarks(values);
+			}
+		};
+
+		window.addEventListener("localStorageChange", handleLocalStorageChange);
+
+		return () => {
+			window.removeEventListener("localStorageChange", handleLocalStorageChange);
+		};
+	}, []);
 
 	if (!bookDiff) return null;
 	return (
@@ -23,6 +45,7 @@ export default function LoreBookContent() {
 			<div className="grid grid-cols-[repeat(auto-fill,40px)] w-full justify-start gap-2">
 				{bookDiff.children.records.map((recordId, index) => {
 					const isActive = recordId.recordHash == record;
+					const isBookmarked = bookmarks.some((bookmark) => bookmark.record == recordId.recordHash);
 
 					const handleOnClick = () => {
 						setRecord(recordId.recordHash);
@@ -31,8 +54,21 @@ export default function LoreBookContent() {
 
 					return (
 						<motion.div key={index} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05, duration: 0.3 }} className="duration-0">
-							<div className={clsx("record", { "active-record": isActive })} onClick={handleOnClick}>
+							<div className={clsx("record relative overflow-hidden", { "active-record": isActive })} onClick={handleOnClick}>
 								{index + 1}
+								{isBookmarked && (
+									<motion.div key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.3 }} className="duration-0">
+										<div className="absolute right-0 top-0 opacity-90">
+											<svg className="w-2 h-8" xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 100 400" width="100" height="400">
+												<defs>
+													<image width="100" height="400" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAGQAQMAAABiWFesAAAAAXNSR0IB2cksfwAAAAZQTFRF8D4+AAAAvhApowAAAAJ0Uk5T/wDltzBKAAAAtUlEQVR4nO3PsQ2EMBBEUSwHDimBUtzKdWJKoxRKICQ4scfa7HqsEx3MZC/6mmniOI7jOI7jOI7jOI7jOO5vn3eFAxW/qDRoFtQi66uK7CBBBZETcoOSyIU51CIC+XyrB8utDXIQDCp/GFUeTCp/OKs8sVRZIg8qVRassGBoOiDnidR0Yc7UcpbPjzbImR60RBgUTSfknvxsEsw1ZdcKuRZ0aCIMil0n5Gqw5/Rhz2kiDyqg/QcgfSzb0MwXfgAAAABJRU5ErkJggg==" />
+												</defs>
+												<style />
+												<use href="#img1" x="0" y="0" />
+											</svg>
+										</div>
+									</motion.div>
+								)}
 							</div>
 						</motion.div>
 					);
