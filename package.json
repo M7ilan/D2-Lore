@@ -11,6 +11,7 @@
 	},
 	"dependencies": {
 		"@heroicons/react": "latest",
+		"@vercel/analytics": "^1.1.1",
 		"bungie-api-ts": "^5.0.0",
 		"clsx": "latest",
 		"framer-motion": "^10.16.5",
@@ -22,8 +23,7 @@
 		"react-hot-toast": "latest",
 		"react-icons": "latest",
 		"react-syntax-highlighter": "latest",
-		"sharp": "latest",
-		"@vercel/analytics": "latest"
+		"sharp": "latest"
 	},
 	"devDependencies": {
 		"@types/node": "latest",
