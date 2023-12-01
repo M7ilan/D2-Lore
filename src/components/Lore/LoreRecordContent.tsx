@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLore } from "@/src/providers/LoreProvider";
 import { useManifest } from "@/src/providers/ManifestProvider";
 import { motion } from "framer-motion";
-import { HiCheck, HiShare } from "react-icons/hi";
+import { HiCheck, HiShare, HiOutlineBookmark, HiBookmark } from "react-icons/hi";
 
 export default function LoreRecordContent() {
 	const { manifest } = useManifest();
@@ -15,6 +15,7 @@ export default function LoreRecordContent() {
 	const description = lore && lore?.displayProperties.description;
 
 	const [isLinkCopied, setIsLinkCopied] = useState(false);
+	const [bookmarked, setBookmarked] = useState(false);
 
 	const handleShareClick = () => {
 		const currentUrl = `${window.location.origin}/books/${node}/${book}/${record}`;
@@ -26,15 +27,42 @@ export default function LoreRecordContent() {
 		}, 2000);
 	};
 
+	useEffect(() => {
+		const savedBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}");
+		setBookmarked(savedBookmarks[record] || false);
+	}, [record]);
+
+	const updateLocalStorage = (newBookmarked: boolean) => {
+		const savedBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}");
+		savedBookmarks[record] = newBookmarked;
+		localStorage.setItem("bookmarks", JSON.stringify(savedBookmarks));
+	};
+
+	const handleBookmarkClick = () => {
+		setBookmarked((prev) => {
+			const newBookmarked = !prev;
+			updateLocalStorage(newBookmarked);
+			return newBookmarked;
+		});
+	};
+
 	if (!recordDiff) return null;
 	return (
 		<div className="grid grid-rows-[min-content_1fr] lg:pl-8 lg:border-l border-default border-opacity-10 gap-8">
 			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.3 }} className="duration-0">
 				<div className="flex justify-between items-center py-6 border-y border-default border-opacity-20 title text-default !text-opacity-80">
-					<div className="w-8"></div>
-					<div>{title}</div>
-					<div className="w-8 center cursor-pointer" onClick={handleShareClick}>
-						{isLinkCopied ? <HiCheck /> : <HiShare />}
+					<div className="flex">
+						<div className="w-8 h-8"></div>
+						<div className="w-8 h-8"></div>
+					</div>
+					<div id={`record-title-[${book}]`} className="scroll-mt-8">{title}</div>
+					<div className="flex">
+						<div className="center cursor-pointer bg-default-0-hover p-1 rounded-md" onClick={handleBookmarkClick}>
+							{bookmarked ? <HiBookmark /> : <HiOutlineBookmark />}
+						</div>
+						<div className="center cursor-pointer bg-default-0-hover p-1 rounded-md" onClick={handleShareClick}>
+							{isLinkCopied ? <HiCheck /> : <HiShare />}
+						</div>
 					</div>
 				</div>
 			</motion.div>
