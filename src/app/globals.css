@@ -22,7 +22,7 @@ button {
 }
 
 .btn-0 {
-	@apply !bg-OpenColor-gray-2 dark:!bg-OpenColor-gray-8/50 hover:dark:!bg-OpenColor-gray-8 px-4 py-2 rounded-xl cursor-pointer hover:ring-2 ring-2 ring-main ring-offset-4 ring-transparent dark:ring-transparent hover:ring-main hover:dark:ring-current hover:ring-offset-2 dark:ring-offset-OpenColor-gray-9 focus:ring-main focus:dark:ring-current;
+	@apply !bg-OpenColor-gray-1 dark:!bg-OpenColor-gray-8/50 hover:dark:!bg-OpenColor-gray-8 px-4 py-2 rounded-xl cursor-pointer hover:ring-2 ring-2 ring-main ring-offset-4 ring-transparent dark:ring-transparent hover:ring-main hover:dark:ring-current hover:ring-offset-2 dark:ring-offset-OpenColor-gray-9 focus:ring-main focus:dark:ring-current;
 }
 
 .btn-1 {

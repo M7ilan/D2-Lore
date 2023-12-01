@@ -41,8 +41,10 @@ export default function BookmarkPage() {
 		}
 	};
 
+	if (bookmarks.length === 0) return <div className="grid border-y h-full items-center border-default title center py-8">You don&apos;t have any bookmarks yet!</div>;
+
 	return (
-		<div className="grid grid-cols-[1fr] grid-rows-[min-content_1fr] md:grid-cols-[320px_2fr] md:grid-rows-[1fr] md:gap-x-8 gap-y-2">
+		<div className="grid grid-cols-[1fr] grid-rows-[min-content_1fr] md:grid-cols-[320px_2fr] md:grid-rows-[1fr] md:gap-x-8 gap-y-2 duration-0">
 			<div className="flex md:col-span-2 justify-between items-center">
 				<motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2 title duration-0">
 					<div className="opacity-50 font-normal">Bookmark</div>
