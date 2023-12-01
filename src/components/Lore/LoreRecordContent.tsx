@@ -32,18 +32,19 @@ export default function LoreRecordContent() {
 		setBookmarked(savedBookmarks[record] || false);
 	}, [record]);
 
-	const updateLocalStorage = (newBookmarked: boolean) => {
-		const savedBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}");
-		savedBookmarks[record] = newBookmarked;
+	const updateLocalStorage = () => {
+		let savedBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}");
+		if (savedBookmarks[record]) {
+			delete savedBookmarks[record];
+		} else {
+			savedBookmarks[record] = { node, book, record };
+		}
 		localStorage.setItem("bookmarks", JSON.stringify(savedBookmarks));
 	};
 
 	const handleBookmarkClick = () => {
-		setBookmarked((prev) => {
-			const newBookmarked = !prev;
-			updateLocalStorage(newBookmarked);
-			return newBookmarked;
-		});
+		setBookmarked((prev) => !prev);
+		updateLocalStorage();
 	};
 
 	if (!recordDiff) return null;
@@ -55,7 +56,9 @@ export default function LoreRecordContent() {
 						<div className="w-8 h-8"></div>
 						<div className="w-8 h-8"></div>
 					</div>
-					<div id={`record-title-[${book}]`} className="scroll-mt-8">{title}</div>
+					<div id={`record-title-[${book}]`} className="scroll-mt-8">
+						{title}
+					</div>
 					<div className="flex">
 						<div className="center cursor-pointer bg-default-0-hover p-1 rounded-md" onClick={handleBookmarkClick}>
 							{bookmarked ? <HiBookmark /> : <HiOutlineBookmark />}

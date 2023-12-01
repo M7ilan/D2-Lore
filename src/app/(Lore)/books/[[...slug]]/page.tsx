@@ -68,6 +68,30 @@ export default function LorePage({ params }: { params: { slug: number[] } }) {
 		}
 	}, [book]);
 
+	useEffect(() => {
+		if (nodeSlug) {
+			setNode(nodeSlug);
+
+			if (bookSlug) {
+				setBook(bookSlug);
+				const firstRecordOfSelectedBook = manifest?.DestinyPresentationNodeDefinition[bookSlug]?.children?.records[0]?.recordHash ?? 0;
+				setRecord(firstRecordOfSelectedBook);
+
+				if (recordSlug) {
+					setTimeout(() => {
+						setRecord(recordSlug);
+					}, 10);
+				} else if (!bookSlug) {
+					setRecord(fetchFirstBookAndRecord(manifest, nodeSlug).firstRecord);
+				}
+			} else {
+				setBook(fetchFirstBookAndRecord(manifest, nodeSlug).firstBook);
+			}
+		} else {
+			setNode(fetchFirstNode(manifest));
+		}
+	}, []);
+
 	return (
 		<div className="grid grid-cols-[1fr] grid-rows-[min-content_1fr] md:grid-cols-[320px_2fr] md:grid-rows-[1fr] md:gap-x-8 gap-y-2">
 			<div className="flex md:col-span-2 justify-between items-center">

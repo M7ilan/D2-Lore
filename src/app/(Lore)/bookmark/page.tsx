@@ -4,29 +4,27 @@ import LoreRecordContent from "@/src/components/Lore/LoreRecordContent";
 import useIsSmallScreen from "@/src/hooks/useIsSmallScreen";
 import { useLore } from "@/src/providers/LoreProvider";
 import { useManifest } from "@/src/providers/ManifestProvider";
+import { Bookmark } from "@/src/types/Bookmark";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { HiOutlineBookOpen } from "react-icons/hi";
 
 export default function BookmarkPage() {
 	const { manifest } = useManifest();
 	const { setBook, record, setRecord } = useLore();
-	const [bookmarks, setBookmarks] = useState<number[]>([]);
+	const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
 	const isSmallScreen = useIsSmallScreen();
 
 	useEffect(() => {
 		const savedBookmarks = localStorage.getItem("bookmarks");
 		if (savedBookmarks) {
 			const parsedBookmarks = JSON.parse(savedBookmarks);
-			const trueBookmarks = Object.keys(parsedBookmarks)
-				.filter((key: string) => parsedBookmarks[key] === true)
-				.map((key: string) => parseInt(key));
-			setBookmarks(trueBookmarks);
-			if (trueBookmarks.length > 0) {
-				setBook(trueBookmarks[0]);
-				setRecord(trueBookmarks[0]);
-			} else {
-				setBook(0);
-				setRecord(0);
+			const bookmarkValues = Object.values(parsedBookmarks) as Bookmark[];
+			setBookmarks(bookmarkValues);
+			if (bookmarkValues.length > 0) {
+				setBook(bookmarkValues[0].book);
+				setRecord(bookmarkValues[0].record);
 			}
 		}
 	}, []);
@@ -53,8 +51,13 @@ export default function BookmarkPage() {
 			<div className="grid grid-cols-1 content-start max-md:mb-16 gap-8">
 				<div className="grid text-center items-center gap-2">
 					{bookmarks.map((bookmark, index) => (
-						<div key={index} className="btn-0" onClick={() => handleSmoothScroll(bookmark)}>
-							{manifest?.DestinyRecordDefinition[bookmark].displayProperties.name}
+						<div key={index} className="flex gap-2">
+							<div className="btn-0 flex-1" onClick={() => handleSmoothScroll(bookmark.record)}>
+								{manifest?.DestinyRecordDefinition[bookmark.record].displayProperties.name}
+							</div>
+							<Link href={`/books/${bookmark.node}/${bookmark.book}/${bookmark.record}`} className="btn-0 !p-2">
+								<HiOutlineBookOpen className="w-6 h-6" />
+							</Link>
 						</div>
 					))}
 				</div>

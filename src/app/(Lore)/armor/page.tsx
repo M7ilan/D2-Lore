@@ -1,3 +1,5 @@
+"use client";
+
 export default function ArmorPage() {
 	const dotStyle = {
 		animation: "dot 1.4s infinite",
