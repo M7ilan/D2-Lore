@@ -203,11 +203,11 @@ hr {
 }
 
 .node {
-	@apply ring-default rounded-md center border border-default !bg-OpenColor-gray-9/0 dark:!bg-white/0 hover:!bg-OpenColor-gray-9/10 dark:hover:!bg-white/10 opacity-50 hover:opacity-100;
+	@apply ring-default rounded-md center border border-default !bg-OpenColor-gray-9/0 dark:!bg-white/0 hover:!bg-OpenColor-gray-9/10 dark:hover:!bg-white/10 opacity-50 hover:dark:opacity-100 hover:opacity-75;
 }
 
 .active-node {
-	@apply !opacity-100 !bg-opacity-25 !bg-OpenColor-gray-9/10 dark:!bg-white/10 active-ring;
+	@apply !opacity-75 dark:!opacity-100 !bg-opacity-25 !bg-OpenColor-gray-9/10 dark:!bg-white/10 active-ring;
 }
 
 .book {
