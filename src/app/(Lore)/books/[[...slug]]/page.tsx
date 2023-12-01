@@ -83,7 +83,7 @@ export default function LorePage({ params }: { params: { slug: number[] } }) {
 					<LoreBook key={`book-${node}`} />
 				</div>
 			</div>
-			<div className="grid grid-rows-[min-content_1fr] lg:grid-cols-[minmax(120px,360px)_minmax(320px,1fr)] gap-8 md:pl-8 md:border-l border-white border-opacity-10 duration-0">
+			<div className="grid grid-rows-[min-content_1fr] lg:grid-cols-[minmax(120px,360px)_minmax(320px,1fr)] gap-8 md:pl-8 md:border-l border-white border-opacity-10">
 				<LoreBookContent key={`bookcontent-${book}`} />
 				<LoreRecordContent key={`recordcontent-${record}`} />
 			</div>

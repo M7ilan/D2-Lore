@@ -15,7 +15,7 @@ export default function ArmorPage() {
 	};
 
 	return (
-		<div className="grid border-y h-full items-center border-default header center">
+		<div className="grid border-y h-full items-center border-default header center py-8">
 			Coming Soon
 			<span style={dotStyle}>.</span>
 			<span style={delay1Style}>.</span>

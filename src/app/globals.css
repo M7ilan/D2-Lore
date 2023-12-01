@@ -22,7 +22,7 @@ button {
 }
 
 .btn-0 {
-	@apply !bg-OpenColor-gray-2 dark:!bg-OpenColor-gray-8 px-4 py-2 rounded-xl cursor-pointer hover:ring-2 ring-2 ring-main ring-offset-4 ring-transparent dark:ring-transparent hover:ring-main hover:dark:ring-current hover:ring-offset-2 dark:ring-offset-OpenColor-gray-9 focus:ring-main focus:dark:ring-current;
+	@apply !bg-OpenColor-gray-2 dark:!bg-OpenColor-gray-8/50 hover:dark:!bg-OpenColor-gray-8 px-4 py-2 rounded-xl cursor-pointer hover:ring-2 ring-2 ring-main ring-offset-4 ring-transparent dark:ring-transparent hover:ring-main hover:dark:ring-current hover:ring-offset-2 dark:ring-offset-OpenColor-gray-9 focus:ring-main focus:dark:ring-current;
 }
 
 .btn-1 {
@@ -186,8 +186,12 @@ hr {
 	@apply !bg-white dark:!bg-OpenColor-gray-9;
 }
 
-.bg-default-reverse {
-	@apply !bg-OpenColor-gray-9 dark:!bg-white;
+.bg-default-0 {
+	@apply dark:!bg-OpenColor-gray-8 !bg-OpenColor-gray-1;
+}
+
+.bg-default-0-hover {
+	@apply dark:hover:!bg-OpenColor-gray-8 hover:!bg-OpenColor-gray-1;
 }
 
 .ring-default {
@@ -199,7 +203,7 @@ hr {
 }
 
 .node {
-	@apply ring-default rounded-md center p-2 border border-default !bg-OpenColor-gray-9/0 dark:!bg-white/0 hover:!bg-OpenColor-gray-9/10 dark:hover:!bg-white/10 opacity-50 hover:opacity-100;
+	@apply ring-default rounded-md center border border-default !bg-OpenColor-gray-9/0 dark:!bg-white/0 hover:!bg-OpenColor-gray-9/10 dark:hover:!bg-white/10 opacity-50 hover:opacity-100;
 }
 
 .active-node {
