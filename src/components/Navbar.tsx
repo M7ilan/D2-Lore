@@ -5,10 +5,18 @@ import Logo from "./Logo";
 import clsx from "clsx";
 import SwitchThemeButton from "./SwitchThemeButton";
 import Socials from "./Socials";
+import Link from "next/link";
 
 function NavbarElements() {
+	const isBeta = window.location.href !== "https://beta.d2lore.com";
+
 	return (
 		<>
+			{isBeta && (
+				<Link href={"https://beta.d2lore.com"} className="btn-0">
+					TRY BETA
+				</Link>
+			)}
 			<Socials />
 			<SwitchThemeButton />
 		</>
