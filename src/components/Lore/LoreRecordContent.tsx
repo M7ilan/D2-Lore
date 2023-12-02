@@ -16,8 +16,17 @@ export default function LoreRecordContent() {
 
 	const [isLinkCopied, setIsLinkCopied] = useState(false);
 	const [bookmarked, setBookmarked] = useState(false);
+	const [isRead, setIsRead] = useState(false);
 
-	const handleShareClick = () => {
+	useEffect(() => {
+		const savedBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}");
+		setBookmarked(savedBookmarks[record] || false);
+
+		const savedRead = JSON.parse(localStorage.getItem("read") || "{}");
+		setIsRead(!!savedRead[record]);
+	}, [record]);
+
+	function handleShareClick() {
 		const currentUrl = `${window.location.origin}/books/${node}/${book}/${record}`;
 		navigator.clipboard.writeText(currentUrl);
 		setIsLinkCopied(true);
@@ -25,14 +34,9 @@ export default function LoreRecordContent() {
 		setTimeout(() => {
 			setIsLinkCopied(false);
 		}, 2000);
-	};
+	}
 
-	useEffect(() => {
-		const savedBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}");
-		setBookmarked(savedBookmarks[record] || false);
-	}, [record]);
-
-	const updateLocalStorage = () => {
+	function updateLocalStorage() {
 		let savedBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}");
 		if (savedBookmarks[record]) {
 			delete savedBookmarks[record];
@@ -46,14 +50,31 @@ export default function LoreRecordContent() {
 				detail: { bookmarks: savedBookmarks },
 			}),
 		);
-	};
+	}
 
-	const handleBookmarkClick = () => {
+	function handleBookmarkClick() {
 		setBookmarked((prev) => !prev);
 		updateLocalStorage();
-	};
+	}
 
-	if (!recordDiff) return null;
+	function handleReadClick() {
+		const savedRead = JSON.parse(localStorage.getItem("read") || "{}");
+		if (savedRead[record]) {
+			delete savedRead[record];
+			setIsRead(false);
+		} else {
+			savedRead[record] = { node, book, record };
+			setIsRead(true);
+		}
+		localStorage.setItem("read", JSON.stringify(savedRead));
+
+		window.dispatchEvent(
+			new CustomEvent("localStorageChange", {
+				detail: { read: savedRead },
+			}),
+		);
+	}
+
 	return (
 		<div className="grid grid-rows-[min-content_1fr] lg:pl-8 lg:border-l border-default border-opacity-10 gap-8">
 			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.3 }} className="duration-0">
@@ -76,7 +97,10 @@ export default function LoreRecordContent() {
 				</div>
 			</motion.div>
 			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.3 }} className="duration-0">
-				<div className="whitespace-pre-line text-default !text-opacity-80">{description}</div>
+				<div className="grid grid-rows-[1fr_min-content] grid-cols-1 gap-16 h-full justify-between whitespace-pre-line text-default !text-opacity-80">
+					<div>{description}</div>
+					<button onClick={handleReadClick}>{isRead ? "Mark as unread" : "Mark as read"}</button>
+				</div>
 			</motion.div>
 		</div>
 	);
