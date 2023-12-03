@@ -8,7 +8,7 @@ import { useManifest } from "@/src/providers/ManifestProvider";
 import { useEffect } from "react";
 import { useLore } from "@/src/providers/LoreProvider";
 import { motion } from "framer-motion";
-import { fetchFirstBookAndRecord, fetchFirstNode } from "@/src/utils/NBRs";
+import { getFirstBook, getFirstNode, getFirstRecord } from "@/src/utils/NBRs";
 
 export default function LorePage({ params }: { params: { slug: number[] } }) {
 	const { manifest } = useManifest();
@@ -20,12 +20,12 @@ export default function LorePage({ params }: { params: { slug: number[] } }) {
 
 	useEffect(() => {
 		if (manifest && !nodeSlug && !bookSlug && !recordSlug) {
-			const defaultNode = fetchFirstNode(manifest);
+			const defaultNode = getFirstNode(manifest);
 			setNode(defaultNode);
 
-			const { firstBook, firstRecord } = fetchFirstBookAndRecord(manifest, defaultNode);
+			const firstBook = getFirstBook(manifest, defaultNode);
 			setBook(firstBook);
-			setRecord(firstRecord);
+			setRecord(getFirstRecord(manifest, firstBook));
 		}
 
 		if (nodeSlug) {
@@ -33,38 +33,34 @@ export default function LorePage({ params }: { params: { slug: number[] } }) {
 
 			if (bookSlug) {
 				setBook(bookSlug);
-				const firstRecordOfSelectedBook = manifest?.DestinyPresentationNodeDefinition[bookSlug]?.children?.records[0]?.recordHash ?? 0;
-				setRecord(firstRecordOfSelectedBook);
+				setRecord(getFirstRecord(manifest, bookSlug));
 
 				if (recordSlug) {
 					setTimeout(() => {
 						setRecord(recordSlug);
 					}, 10);
 				} else if (!bookSlug) {
-					setRecord(fetchFirstBookAndRecord(manifest, nodeSlug).firstRecord);
+					setRecord(getFirstRecord(manifest, nodeSlug));
 				}
 			} else {
-				setBook(fetchFirstBookAndRecord(manifest, nodeSlug).firstBook);
+				setBook(getFirstBook(manifest, nodeSlug));
 			}
 		} else {
-			setNode(fetchFirstNode(manifest));
+			setNode(getFirstNode(manifest));
 		}
 	}, [manifest]);
 
 	useEffect(() => {
 		if (node) {
-			const { firstBook, firstRecord } = fetchFirstBookAndRecord(manifest, node);
+			const firstBook = getFirstBook(manifest, node);
 			setBook(firstBook);
-			setRecord(firstRecord);
+			setRecord(getFirstRecord(manifest, firstBook));
 		}
 	}, [node]);
 
 	useEffect(() => {
 		if (book) {
-			const newBook = manifest?.DestinyPresentationNodeDefinition[book];
-			const firstRecord = newBook?.children.records[0]?.recordHash ?? 0;
-
-			setRecord(firstRecord);
+			setRecord(getFirstRecord(manifest, book));
 		}
 	}, [book]);
 
@@ -74,21 +70,20 @@ export default function LorePage({ params }: { params: { slug: number[] } }) {
 
 			if (bookSlug) {
 				setBook(bookSlug);
-				const firstRecordOfSelectedBook = manifest?.DestinyPresentationNodeDefinition[bookSlug]?.children?.records[0]?.recordHash ?? 0;
-				setRecord(firstRecordOfSelectedBook);
+				setRecord(getFirstRecord(manifest, bookSlug));
 
 				if (recordSlug) {
 					setTimeout(() => {
 						setRecord(recordSlug);
 					}, 10);
 				} else if (!bookSlug) {
-					setRecord(fetchFirstBookAndRecord(manifest, nodeSlug).firstRecord);
+					setRecord(getFirstRecord(manifest, nodeSlug));
 				}
 			} else {
-				setBook(fetchFirstBookAndRecord(manifest, nodeSlug).firstBook);
+				setBook(getFirstBook(manifest, nodeSlug));
 			}
 		} else {
-			setNode(fetchFirstNode(manifest));
+			setNode(getFirstNode(manifest));
 		}
 	}, []);
 
@@ -107,7 +102,7 @@ export default function LorePage({ params }: { params: { slug: number[] } }) {
 					<LoreBook key={`book-${node}`} />
 				</div>
 			</div>
-			<div className="grid grid-rows-[min-content_1fr] lg:grid-cols-[minmax(120px,360px)_minmax(320px,1fr)] gap-8 md:pl-8 md:border-l border-white border-opacity-10">
+			<div className="grid grid-rows-[min-content_1fr] lg:grid-cols-[minmax(120px,328px)_minmax(320px,1fr)] gap-8 md:pl-8 md:border-l border-white border-opacity-10">
 				<LoreBookContent key={`bookcontent-${book}`} />
 				<LoreRecordContent key={`recordcontent-${record}`} />
 			</div>

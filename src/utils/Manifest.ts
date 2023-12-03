@@ -31,9 +31,9 @@ async function storeManifestData(manifestComponents: NeededManifestComponents): 
 export async function getManifestVersion(): Promise<string> {
 	console.log("Getting Manifest Version...");
 	const manifest = await getDestinyManifest();
-	localStorage.setItem("manifestVersion", manifest.version);
-	console.log("Got Manifest Version:", manifest.version);
-	return manifest.version;
+	localStorage.setItem("manifestVersion", manifest?.version);
+	console.log("Got Manifest Version:", manifest?.version);
+	return manifest?.version;
 }
 
 export async function isManifestUpToDate(): Promise<boolean> {

@@ -33,14 +33,14 @@ export default function LoreBook() {
 		const values: NBR[] = Object.values(savedBookmarks);
 		setBookmarks(values);
 
-		const handleLocalStorageChange = (event: any) => {
+		const handleLocalStorageChangeBookmarks = (event: any) => {
 			if (event.detail && event.detail.bookmarks) {
 				const values: NBR[] = Object.values(event.detail.bookmarks);
 				setBookmarks(values);
 			}
 		};
 
-		window.addEventListener("localStorageChange", handleLocalStorageChange);
+		window.addEventListener("localStorageChange", handleLocalStorageChangeBookmarks);
 
 		const savedRead = JSON.parse(localStorage.getItem("read") || "{}");
 		const readValues: NBR[] = Object.values(savedRead);
@@ -56,7 +56,7 @@ export default function LoreBook() {
 		window.addEventListener("localStorageChange", handleLocalStorageChangeRead);
 
 		return () => {
-			window.removeEventListener("localStorageChange", handleLocalStorageChange);
+			window.removeEventListener("localStorageChange", handleLocalStorageChangeBookmarks);
 			window.removeEventListener("localStorageChange", handleLocalStorageChangeRead);
 		};
 	}, []);
@@ -94,7 +94,7 @@ export default function LoreBook() {
 								style={{ height: `${calculatedHeight}%` }}
 							></div> */}
 							{isBookmarked && (
-								<motion.div key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.3 }} className="duration-0">
+								<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.3 }} className="duration-0">
 									<div className="absolute right-2 opacity-90">
 										<svg className="w-3 h-12" xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 100 400" width="100" height="400">
 											<defs>
@@ -106,26 +106,14 @@ export default function LoreBook() {
 									</div>
 								</motion.div>
 							)}
-							{isComplete && isImageLoaded && (
-								<motion.div key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.3 }} className="duration-0">
+							{isComplete && (
+								<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.3 }} className="duration-0">
 									<div className="absolute m-1 opacity-90 drop-shadow-[0_2px_2px_rgba(0,0,0,0.3)]">
 										<HiStar className="w-6 h-6 text-OpenColor-yellow-5 duration-0" />
 									</div>
 								</motion.div>
 							)}
-							<Image
-								quality={100}
-								onLoad={() => handleImageLoad(bookId.presentationNodeHash)}
-								className={clsx({
-									"opacity-100": isImageLoaded,
-									"opacity-0": !isImageLoaded,
-								})}
-								priority
-								src={`https://www.bungie.net${bookDefinition?.displayProperties.iconSequences[1].frames[0]}`}
-								width={1436}
-								height={1840}
-								alt="Book"
-							/>
+							<Image quality={100} onLoad={() => handleImageLoad(bookId.presentationNodeHash)} className={clsx({ "opacity-100": isImageLoaded[bookId.presentationNodeHash], "opacity-0": !isImageLoaded[bookId.presentationNodeHash] })} priority src={`https://www.bungie.net${bookDefinition?.displayProperties.iconSequences[1].frames[0]}`} width={1436} height={1840} alt="Book" />
 						</div>
 						<div className={clsx("active-book opacity-0", { "active-book opacity-100": isActive })}></div>
 					</motion.div>
