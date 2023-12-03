@@ -106,7 +106,7 @@ export default function LoreBook() {
 									</div>
 								</motion.div>
 							)}
-							{isComplete && (
+							{isComplete && isImageLoaded && (
 								<motion.div key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.3 }} className="duration-0">
 									<div className="absolute m-1 opacity-90 drop-shadow-[0_2px_2px_rgba(0,0,0,0.3)]">
 										<HiStar className="w-6 h-6 text-OpenColor-yellow-5 duration-0" />
