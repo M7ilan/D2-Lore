@@ -69,7 +69,7 @@ export default function LoreBook() {
 				const isBookmarked = bookmarks.some((bookmark) => bookmark.book == bookId.presentationNodeHash);
 				const currentBookRecords = bookDefinition?.children.records.length || 0;
 				const currentBookReads = reads.filter((read) => read.book == bookId.presentationNodeHash).length;
-				const calculatedHeight = 101 - (currentBookReads / currentBookRecords) * 100;
+				// const calculatedHeight = 101 - (currentBookReads / currentBookRecords) * 100;
 				const isComplete = currentBookReads == currentBookRecords;
 
 				const handleOnClick = () => {
@@ -86,13 +86,13 @@ export default function LoreBook() {
 								handleOnClick();
 							}}
 						>
-							<div
+							{/* <div
 								className={clsx("absolute top-0 w-full backdrop-grayscale", {
 									"opacity-100": isImageLoaded,
 									"opacity-0": !isImageLoaded,
 								})}
 								style={{ height: `${calculatedHeight}%` }}
-							></div>
+							></div> */}
 							{isBookmarked && (
 								<motion.div key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.3 }} className="duration-0">
 									<div className="absolute right-2 opacity-90">

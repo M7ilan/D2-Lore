@@ -14,13 +14,13 @@ export default function LoreBookContent() {
 	const { isImageLoaded, handleImageLoad } = useImageLoad();
 	const [bookmarks, setBookmarks] = useState<NBR[]>([]);
 	const [reads, setReads] = useState<NBR[]>([]);
-	const [currentBookRecords, setCurrentBookRecords] = useState<number>(0);
-	const [currentBookReads, setCurrentBookReads] = useState<number>(0);
+	// const [currentBookRecords, setCurrentBookRecords] = useState<number>(0);
+	// const [currentBookReads, setCurrentBookReads] = useState<number>(0);
 
 	useEffect(() => {
-		setCurrentBookRecords(bookDiff?.children.records.length || 0);
-		const readsValues = reads.filter((read) => read.book == book);
-		setCurrentBookReads(readsValues.length);
+		// setCurrentBookRecords(bookDiff?.children.records.length || 0);
+		// const readsValues = reads.filter((read) => read.book == book);
+		// setCurrentBookReads(readsValues.length);
 
 		const savedBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "{}");
 		const values: NBR[] = Object.values(savedBookmarks);
@@ -64,7 +64,7 @@ export default function LoreBookContent() {
 			</div>
 			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.3 }} className="duration-0 relative">
 				<Image quality={100} priority src={`https://www.bungie.net${bookDiff.displayProperties.iconSequences[1].frames[0]}`} className={isImageLoaded[book] ? "hidden lg:block shadow-lg opacity-100" : "hidden lg:block shadow-lg opacity-0"} width={1436} height={1840} alt="Book" onLoad={() => handleImageLoad(book)} />
-				<div className="absolute top-0 w-full backdrop-grayscale" style={{ height: `${100 - (currentBookReads / currentBookRecords) * 100}%` }}></div>
+				{/* <div className="absolute top-0 w-full backdrop-grayscale" style={{ height: `${100 - (currentBookReads / currentBookRecords) * 100}%` }}></div> */}
 			</motion.div>
 			<div className="grid grid-cols-[repeat(auto-fill,40px)] w-full justify-start gap-2">
 				{bookDiff.children.records.map((recordId, index) => {
