@@ -41,7 +41,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 				<Toaster position="top-center" reverseOrder={false} />
 				<MainProvider>
 					<Navbar />
-					<main className="mt-8 px-16 m-auto pb-16">{children}</main>
+					<main className="mt-8 pb-16">{children}</main>
 					{/* <Footer /> */}
 				</MainProvider>
 			</body>

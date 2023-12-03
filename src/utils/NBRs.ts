@@ -1,14 +1,23 @@
 import { AllDestinyManifestComponents } from "bungie-api-ts/destiny2";
 
-export function fetchFirstNode(manifest: AllDestinyManifestComponents | null) {
+export function getFirstNode(manifest: AllDestinyManifestComponents | null) {
 	const lore = manifest?.DestinyPresentationNodeDefinition[4077680549]; // Lore Definition
 	return lore?.children.presentationNodes[0].presentationNodeHash ?? 0;
 }
 
-export function fetchFirstBookAndRecord(manifest: AllDestinyManifestComponents | null, node: number) {
+export function getFirstBook(manifest: AllDestinyManifestComponents | null, node: number) {
 	const newNode = manifest?.DestinyPresentationNodeDefinition[node];
-	const firstBook = newNode?.children.presentationNodes[0].presentationNodeHash ?? 0;
-	const firstRecord = (firstBook && manifest?.DestinyPresentationNodeDefinition[firstBook].children.records[0].recordHash) ?? 0;
+	return newNode?.children.presentationNodes[0].presentationNodeHash ?? 0;
+}
 
-	return { firstBook, firstRecord };
+export function getFirstRecord(manifest: AllDestinyManifestComponents | null, book: number) {
+	const records = manifest?.DestinyPresentationNodeDefinition[book].children.records;
+
+	const firstNonEmptyLoreRecord = records?.find((record) => {
+		const loreHash = manifest?.DestinyRecordDefinition[record.recordHash]?.loreHash;
+		const loreTitle = loreHash && manifest?.DestinyLoreDefinition[loreHash]?.displayProperties.name;
+		return loreTitle;
+	});
+
+	return firstNonEmptyLoreRecord?.recordHash ?? 0;
 }

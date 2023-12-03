@@ -63,8 +63,8 @@ export default function Navbar() {
 			</div>
 			<div
 				className={clsx("absolute w-full bg-white dark:bg-OpenColor-gray-9 z-10 flex flex-col p-4 gap-4 items-center border-b-2", {
-					"transform translate-y-0 opacity-100": openMenu,
-					"transform -translate-y-5 opacity-0 pointer-events-none": !openMenu,
+					"-translate-y-10 opacity-100": openMenu,
+					"-translate-y-[60px] opacity-0 pointer-events-none": !openMenu,
 				})}
 			>
 				<NavbarElements />

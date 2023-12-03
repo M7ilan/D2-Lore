@@ -1,6 +1,6 @@
 import { DestinyManifest, DestinyPresentationNodeDefinition, DestinyRecordDefinition, DestinyLoreDefinition } from "bungie-api-ts/destiny2";
 import { DestinyManifestResponse } from "@/src/types/DestinyManifestResponse";
-import { get, set } from "idb-keyval";
+import { del, get, set } from "idb-keyval";
 import { NeededManifestComponents } from "../types/NeededManifestComponents";
 
 const BUNGIE_API_URL = "https://www.bungie.net/Platform/Destiny2";
@@ -31,15 +31,16 @@ async function storeManifestData(manifestComponents: NeededManifestComponents): 
 export async function getManifestVersion(): Promise<string> {
 	console.log("Getting Manifest Version...");
 	const manifest = await getDestinyManifest();
-	localStorage.setItem("manifestVersion", manifest.version);
-	console.log("Got Manifest Version:", manifest.version);
-	return manifest.version;
+	localStorage.setItem("manifestVersion", manifest?.version);
+	console.log("Got Manifest Version:", manifest?.version);
+	return manifest?.version;
 }
 
 export async function isManifestUpToDate(): Promise<boolean> {
 	console.log("Checking if Manifest is up to date...");
 	const storedVersion = localStorage.getItem("manifestVersion");
 	const currentVersion = await getManifestVersion();
+	console.log("isManifestUpToDate: ", storedVersion === currentVersion);
 	return storedVersion === currentVersion;
 }
 
@@ -74,6 +75,10 @@ export async function initializeManifest() {
 	console.log("Initializing Manifest...");
 	await storeManifest();
 	console.log("Manifest Initialized");
+}
+
+export default async function clearManifest() {
+	await del("Manifest");
 }
 
 export async function isValidManifest(): Promise<boolean> {

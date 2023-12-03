@@ -16,7 +16,7 @@ export default function LoreNode() {
 
 				const handleOnClick = () => {
 					setNode(nodeId.presentationNodeHash);
-					window.history.replaceState({}, "", `/${nodeId.presentationNodeHash}`);
+					window.history.replaceState({}, "", `/books/${nodeId.presentationNodeHash}`);
 				};
 
 				return (

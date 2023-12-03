@@ -3,7 +3,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { AllDestinyManifestComponents } from "bungie-api-ts/destiny2";
 import { get } from "idb-keyval";
-import { initializeManifest, isValidManifest } from "@/src/utils/Manifest";
+import clearManifest, { initializeManifest, isValidManifest } from "@/src/utils/Manifest";
 
 interface ManifestContextType {
 	manifest: AllDestinyManifestComponents | null;
@@ -25,6 +25,7 @@ export default function ManifestProvider({ children }: { children: ReactNode }) 
 
 			if (!currentManifest || !(await isValidManifest())) {
 				setLoadingStatus("Initializing Manifest...");
+				await clearManifest();
 				await initializeManifest();
 				currentManifest = await get<AllDestinyManifestComponents>("Manifest");
 			}
