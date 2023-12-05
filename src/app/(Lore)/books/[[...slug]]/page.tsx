@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useLore } from "@/src/providers/LoreProvider";
 import { motion } from "framer-motion";
 import { getFirstBook, getFirstNode, getFirstRecord } from "@/src/utils/NBRs";
+import LoreBooksCounter from "@/src/components/Lore/LoreBooksCounter";
 
 export default function LorePage({ params }: { params: { slug: number[] } }) {
 	const { manifest } = useManifest();
@@ -89,9 +90,10 @@ export default function LorePage({ params }: { params: { slug: number[] } }) {
 
 	return (
 		<div className="grid grid-cols-[1fr] grid-rows-[min-content_1fr] md:grid-cols-[320px_2fr] md:grid-rows-[1fr] md:gap-x-8 gap-y-2">
-			<div className="flex md:col-span-2 justify-between items-center">
-				<motion.div key={`node-${node}`} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2 title duration-0">
+			<div className="flex md:col-span-2">
+				<motion.div key={`node-${node}`} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex w-full justify-between items-center gap-2 title duration-0">
 					<div className="opacity-50 font-normal">{manifest?.DestinyPresentationNodeDefinition[node]?.displayProperties?.name}</div>
+					<LoreBooksCounter />
 				</motion.div>
 			</div>
 			<div className="grid grid-rows-[64px_min-content] gap-8">
