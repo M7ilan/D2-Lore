@@ -99,7 +99,7 @@ export default function LoreBook() {
 							)}
 							{isComplete && isImageLoaded[bookId.presentationNodeHash] && (
 								<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.3 }} className="duration-0">
-									<div className="absolute -bottom-6 -right-6 opacity-90 w-10 h-10 bg-OpenColor-yellow-5 rotate-45"></div>
+									<div className="absolute -top-6 -left-6 w-10 h-10 bg-OpenColor-yellow-5 rotate-45"></div>
 								</motion.div>
 							)}
 							<Image quality={100} onLoad={() => handleImageLoad(bookId.presentationNodeHash)} className={clsx({ "opacity-100": isImageLoaded[bookId.presentationNodeHash], "opacity-0": !isImageLoaded[bookId.presentationNodeHash] })} priority src={`https://www.bungie.net${bookDefinition?.displayProperties.iconSequences[1].frames[0]}`} width={1436} height={1840} alt="Book" />
