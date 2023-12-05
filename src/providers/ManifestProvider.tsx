@@ -5,11 +5,11 @@ import { AllDestinyManifestComponents } from "bungie-api-ts/destiny2";
 import { get } from "idb-keyval";
 import clearManifest, { initializeManifest, isValidManifest } from "@/src/utils/Manifest";
 
-interface ManifestContextType {
+type ManifestContextType = {
 	manifest: AllDestinyManifestComponents | null;
 	isLoading: boolean;
 	loadingStatus: string;
-}
+};
 
 const ManifestContext = createContext<ManifestContextType>({ manifest: null, isLoading: true, loadingStatus: "Loading..." });
 

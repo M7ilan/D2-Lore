@@ -7,7 +7,6 @@ import useIsSmallScreen from "@/src/hooks/useIsSmallScreen";
 import useImageLoad from "@/src/hooks/onImageLoad";
 import { useEffect, useState } from "react";
 import { NBR } from "@/src/types/NBR";
-import { HiStar } from "react-icons/hi";
 
 export default function LoreBook() {
 	const { manifest } = useManifest();
@@ -69,7 +68,6 @@ export default function LoreBook() {
 				const isBookmarked = bookmarks.some((bookmark) => bookmark.book == bookId.presentationNodeHash);
 				const currentBookRecords = bookDefinition?.children.records.length || 0;
 				const currentBookReads = reads.filter((read) => read.book == bookId.presentationNodeHash).length;
-				// const calculatedHeight = 101 - (currentBookReads / currentBookRecords) * 100;
 				const isComplete = currentBookReads == currentBookRecords;
 
 				const handleOnClick = () => {
@@ -86,14 +84,7 @@ export default function LoreBook() {
 								handleOnClick();
 							}}
 						>
-							{/* <div
-								className={clsx("absolute top-0 w-full backdrop-grayscale", {
-									"opacity-100": isImageLoaded,
-									"opacity-0": !isImageLoaded,
-								})}
-								style={{ height: `${calculatedHeight}%` }}
-							></div> */}
-							{isBookmarked && (
+							{isBookmarked && isImageLoaded[bookId.presentationNodeHash] && (
 								<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.3 }} className="duration-0">
 									<div className="absolute right-2 opacity-90">
 										<svg className="w-3 h-12" xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 100 400" width="100" height="400">
@@ -106,11 +97,9 @@ export default function LoreBook() {
 									</div>
 								</motion.div>
 							)}
-							{isComplete && (
+							{isComplete && isImageLoaded[bookId.presentationNodeHash] && (
 								<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.3 }} className="duration-0">
-									<div className="absolute m-1 opacity-90 drop-shadow-[0_2px_2px_rgba(0,0,0,0.3)]">
-										<HiStar className="w-6 h-6 text-OpenColor-yellow-5 duration-0" />
-									</div>
+									<div className="absolute -top-6 -left-6 w-10 h-10 bg-OpenColor-yellow-5 rotate-45"></div>
 								</motion.div>
 							)}
 							<Image quality={100} onLoad={() => handleImageLoad(bookId.presentationNodeHash)} className={clsx({ "opacity-100": isImageLoaded[bookId.presentationNodeHash], "opacity-0": !isImageLoaded[bookId.presentationNodeHash] })} priority src={`https://www.bungie.net${bookDefinition?.displayProperties.iconSequences[1].frames[0]}`} width={1436} height={1840} alt="Book" />
