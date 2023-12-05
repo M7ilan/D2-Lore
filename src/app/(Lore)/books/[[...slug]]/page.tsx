@@ -97,7 +97,7 @@ export default function LorePage({ params }: { params: { slug: number[] } }) {
 				</motion.div>
 			</div>
 			<div className="grid grid-rows-[64px_min-content] gap-8">
-				<div className="grid grid-flow-col gap-2">
+				<div className="grid grid-flow-col gap-4">
 					<LoreNode />
 				</div>
 				<div className="grid grid-cols-[repeat(3,1fr)] gap-8">
