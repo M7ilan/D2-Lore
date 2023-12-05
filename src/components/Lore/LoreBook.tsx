@@ -84,7 +84,7 @@ export default function LoreBook() {
 								handleOnClick();
 							}}
 						>
-							{isBookmarked && (
+							{isBookmarked && isImageLoaded[bookId.presentationNodeHash] && (
 								<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.3 }} className="duration-0">
 									<div className="absolute right-2 opacity-90">
 										<svg className="w-3 h-12" xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 100 400" width="100" height="400">
@@ -97,7 +97,7 @@ export default function LoreBook() {
 									</div>
 								</motion.div>
 							)}
-							{isComplete && (
+							{isComplete && isImageLoaded[bookId.presentationNodeHash] && (
 								<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.3 }} className="duration-0">
 									<div className="absolute -bottom-6 -right-6 opacity-90 w-10 h-10 bg-OpenColor-yellow-5 rotate-45"></div>
 								</motion.div>
