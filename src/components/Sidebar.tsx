@@ -4,6 +4,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { HiSearch } from "react-icons/hi";
 
 export default function Sidebar() {
 	const path = usePathname();
@@ -17,6 +18,9 @@ export default function Sidebar() {
 				</Link>
 				<Link href={"/armor"} className={clsx("node h-16", { "active-node": isActive("/armor") })}>
 					<Image className="max-w-14 max-h-14 object-contain invert dark:invert-0" alt="Armors" src="/Armors.png" width={80} height={80} />
+				</Link>
+				<Link href={"/search"} className={clsx("node h-16", { "active-node": isActive("/search") })}>
+					<HiSearch className="w-14 h-14 p-2" />
 				</Link>
 			</div>
 		</div>

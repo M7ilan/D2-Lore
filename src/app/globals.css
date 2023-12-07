@@ -67,7 +67,7 @@ button {
 }
 
 input {
-	@apply bg-transparent !cursor-text px-2 py-1 btn-click;
+	@apply bg-transparent !cursor-text px-2 py-1 rounded-md border-2 border-default focus:border-OpenColor-gray-7 focus:dark:border-OpenColor-gray-3;
 }
 
 textarea {
@@ -149,6 +149,10 @@ hr {
 
 .hover-1 {
 	@apply relative top-0 hover:-top-1 duration-150 cursor-pointer;
+}
+
+.divide-default {
+	@apply divide-OpenColor-gray-3 dark:divide-OpenColor-gray-8;
 }
 
 .border-default {
