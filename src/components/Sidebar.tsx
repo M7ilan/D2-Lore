@@ -12,7 +12,7 @@ export default function Sidebar() {
 
 	return (
 		<div className="relative md:border-b border-default">
-			<div className="grid max-md:grid-cols-2 w-full gap-4 md:w-16 md:sticky md:top-10">
+			<div className="grid max-md:grid-cols-3 w-full gap-4 md:w-16 md:sticky md:top-10">
 				<Link href={"/books"} className={clsx("node h-16", { "active-node": isActive("/books") })}>
 					<Image className="max-w-12 max-h-12 object-contain invert dark:invert-0" alt="Lore Books" src="/Lore Logo.png" width={80} height={80} />
 				</Link>
