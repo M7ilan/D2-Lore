@@ -19,6 +19,33 @@ export default function LorePage({ params }: { params: { slug: number[] } }) {
 	const bookSlug = params.slug?.[1] ?? 0;
 	const recordSlug = params.slug?.[2] ?? 0;
 
+	function settingNBRs() {
+		if (nodeSlug) {
+			setTimeout(() => {
+				setNode(nodeSlug);
+			}, 100);
+
+			if (bookSlug) {
+				setTimeout(() => {
+					setBook(bookSlug);
+				}, 200);
+				setRecord(getFirstRecord(manifest, bookSlug));
+
+				if (recordSlug) {
+					setTimeout(() => {
+						setRecord(recordSlug);
+					}, 300);
+				} else if (!bookSlug) {
+					setRecord(getFirstRecord(manifest, nodeSlug));
+				}
+			} else {
+				setBook(getFirstBook(manifest, nodeSlug));
+			}
+		} else {
+			setNode(getFirstNode(manifest));
+		}
+	}
+
 	useEffect(() => {
 		if (manifest && !nodeSlug && !bookSlug && !recordSlug) {
 			const defaultNode = getFirstNode(manifest);
@@ -29,26 +56,7 @@ export default function LorePage({ params }: { params: { slug: number[] } }) {
 			setRecord(getFirstRecord(manifest, firstBook));
 		}
 
-		if (nodeSlug) {
-			setNode(nodeSlug);
-
-			if (bookSlug) {
-				setBook(bookSlug);
-				setRecord(getFirstRecord(manifest, bookSlug));
-
-				if (recordSlug) {
-					setTimeout(() => {
-						setRecord(recordSlug);
-					}, 10);
-				} else if (!bookSlug) {
-					setRecord(getFirstRecord(manifest, nodeSlug));
-				}
-			} else {
-				setBook(getFirstBook(manifest, nodeSlug));
-			}
-		} else {
-			setNode(getFirstNode(manifest));
-		}
+		settingNBRs();
 	}, [manifest]);
 
 	useEffect(() => {
@@ -66,26 +74,7 @@ export default function LorePage({ params }: { params: { slug: number[] } }) {
 	}, [book]);
 
 	useEffect(() => {
-		if (nodeSlug) {
-			setNode(nodeSlug);
-
-			if (bookSlug) {
-				setBook(bookSlug);
-				setRecord(getFirstRecord(manifest, bookSlug));
-
-				if (recordSlug) {
-					setTimeout(() => {
-						setRecord(recordSlug);
-					}, 10);
-				} else if (!bookSlug) {
-					setRecord(getFirstRecord(manifest, nodeSlug));
-				}
-			} else {
-				setBook(getFirstBook(manifest, nodeSlug));
-			}
-		} else {
-			setNode(getFirstNode(manifest));
-		}
+		settingNBRs();
 	}, []);
 
 	return (
