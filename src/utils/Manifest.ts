@@ -3,8 +3,6 @@ import { DestinyManifestResponse } from "@/src/types/DestinyManifestResponse";
 import { del, get, set } from "idb-keyval";
 import { NeededManifestComponents } from "../types/NeededManifestComponents";
 
-const BUNGIE_API_URL = "https://www.bungie.net/Platform/Destiny2";
-
 async function fetchJSON<T>(url: string): Promise<T> {
 	const response = await fetch(url);
 	const json = await response.json();
@@ -13,9 +11,10 @@ async function fetchJSON<T>(url: string): Promise<T> {
 
 export async function getDestinyManifest(): Promise<DestinyManifest> {
 	console.log("Getting Destiny Manifest...");
-	const url = `${BUNGIE_API_URL}/Manifest/`;
-	const json: DestinyManifestResponse = await fetchJSON(url);
+	const json: DestinyManifestResponse = await fetchJSON("/api/manifest");
 	console.log("Got Destiny Manifest");
+	console.log(json);
+
 	return json.Response;
 }
 
@@ -95,4 +94,15 @@ export async function isValidManifest(): Promise<boolean> {
 		console.error("Error checking manifest:", error);
 		return false;
 	}
+}
+
+export async function checkAPIStatus() {
+	console.log("Checking API Status...");
+	const json: DestinyManifestResponse = await fetchJSON("/api/manifest");
+	if (json.ErrorStatus === "SystemDisabled") {
+		return { down: true, message: "Bungie API is down" };
+	}
+	console.log("API Status Checked");
+
+	return { down: false, message: "Bungie API is up" };
 }
