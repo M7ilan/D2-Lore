@@ -11,7 +11,7 @@ async function fetchJSON<T>(url: string): Promise<T> {
 
 export async function getDestinyManifest(): Promise<DestinyManifest> {
 	console.log("Getting Destiny Manifest...");
-	const json: DestinyManifestResponse = await fetchJSON("/api/manifest");
+	const json: DestinyManifestResponse = await fetchJSON("/api/get-manifest");
 	console.log("Got Destiny Manifest");
 	console.log(json);
 
@@ -98,7 +98,7 @@ export async function isValidManifest(): Promise<boolean> {
 
 export async function checkAPIStatus() {
 	console.log("Checking API Status...");
-	const json: DestinyManifestResponse = await fetchJSON("/api/manifest");
+	const json: DestinyManifestResponse = await fetchJSON("/api/get-manifest");
 	if (json.ErrorStatus === "SystemDisabled") {
 		return { down: true, message: "Bungie API is down" };
 	}
