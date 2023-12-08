@@ -17,15 +17,9 @@ export const metadata: Metadata = {
 		default: "D2 Lore",
 		template: "%s | D2L",
 	},
-	description: "The Destiny 2 Lore Library",
 
-	openGraph: {
-		images: [
-			{
-				url: "https://d2lore.com/api/og",
-			},
-		],
-	},
+	description: "The Destiny 2 Lore Library",
+	metadataBase: new URL("https://d2lore.com"),
 
 	icons: [
 		{
