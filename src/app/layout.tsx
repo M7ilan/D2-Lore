@@ -17,7 +17,10 @@ export const metadata: Metadata = {
 		default: "D2 Lore",
 		template: "%s | D2L",
 	},
-	description: "A Destiny 2 Lore Library",
+
+	description: "The Destiny 2 Lore Library",
+	metadataBase: new URL("https://d2lore.com"),
+
 	icons: [
 		{
 			rel: "icon",
