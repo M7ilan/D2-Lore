@@ -13,7 +13,6 @@ export async function getDestinyManifest(): Promise<DestinyManifest> {
 	console.log("Getting Destiny Manifest...");
 	const json: DestinyManifestResponse = await fetchJSON("/api/get-manifest");
 	console.log("Got Destiny Manifest");
-	console.log(json);
 
 	return json.Response;
 }
