@@ -11,11 +11,13 @@
 	},
 	"dependencies": {
 		"@heroicons/react": "latest",
-		"bungie-api-ts": "^5.0.0",
+		"@vercel/analytics": "latest",
+		"@vercel/speed-insights": "latest",
+		"bungie-api-ts": "latest",
 		"clsx": "latest",
-		"framer-motion": "^10.16.5",
-		"idb-keyval": "^6.2.1",
-		"lodash": "^4.17.21",
+		"framer-motion": "latest",
+		"idb-keyval": "latest",
+		"lodash": "latest",
 		"next": "latest",
 		"next-themes": "latest",
 		"react": "latest",
@@ -26,7 +28,7 @@
 		"sharp": "latest"
 	},
 	"devDependencies": {
-		"@types/lodash": "^4.14.202",
+		"@types/lodash": "latest",
 		"@types/node": "latest",
 		"@types/react": "latest",
 		"@types/react-dom": "latest",
