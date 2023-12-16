@@ -3,11 +3,11 @@ import Navbar from "@/src/components/Navbar";
 // import Footer from "@/src/components/Footer";
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
-import { Roboto_Flex } from "next/font/google";
+import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 import MainProvider from "@/src/providers/MainProvider";
 
-const font = Roboto_Flex({
+const font = Inter({
 	subsets: ["latin"],
 	weight: ["300", "400", "500", "700"],
 });
