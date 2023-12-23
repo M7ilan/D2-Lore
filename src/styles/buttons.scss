@@ -1,9 +1,9 @@
 .primary-button {
-	@apply text-white bg-main px-4 py-2 shadow-sm rounded-md hover:bg-[color-mix(in_srgb,_rgb(var(--background))_20%,_rgb(var(--primary-color)))] active:bg-[color-mix(in_srgb,_rgb(var(--background))_40%,_rgb(var(--primary-color)))];
+	@apply text-white bg-main px-4 py-2 shadow-sm rounded-md cursor-pointer hover:bg-[color-mix(in_srgb,_rgb(var(--background))_20%,_rgb(var(--primary-color)))] active:bg-[color-mix(in_srgb,_rgb(var(--background))_40%,_rgb(var(--primary-color)))];
 }
 
 .secondary-button {
-	@apply text-[rgb(var(--text))] bg-[rgb(var(--background))] px-4 py-2 shadow-sm rounded-md border hover:bg-[color-mix(in_srgb,_rgb(var(--text))_10%,_rgb(var(--background)))] active:bg-[color-mix(in_srgb,_rgb(var(--text))_20%,_rgb(var(--background)))];
+	@apply text-[rgb(var(--text))] bg-[rgb(var(--background))] px-4 py-2 shadow-sm rounded-md border cursor-pointer hover:bg-[color-mix(in_srgb,_rgb(var(--text))_10%,_rgb(var(--background)))] active:bg-[color-mix(in_srgb,_rgb(var(--text))_20%,_rgb(var(--background)))];
 }
 
 .clickable-button {

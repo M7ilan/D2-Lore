@@ -9,16 +9,16 @@ import { useLore } from "@/src/providers/LoreProvider";
 import { useManifest } from "@/src/providers/ManifestProvider";
 import { getFirstRecord } from "@/src/utils/GetFirst";
 import { bookmarkSVG } from "@/src/icons";
-import { useBookmarks } from "@/src/providers/BookmarksProvider";
-import { useReads } from "@/src/providers/ReadsProvider";
+import { useSelector } from "react-redux";
+import { RootState } from "@/src/redux/store";
 
 export default function BooksPage() {
 	const books = useBooks();
 	const { manifest } = useManifest();
 	const { node, book, setBook, setRecord } = useLore();
 	const { isImageLoaded, handleImageLoad } = useImageLoad();
-	const { bookmarks } = useBookmarks();
-	const { reads } = useReads();
+	const bookmarks = useSelector((state: RootState) => state.bookmarks.bookmarks);
+	const reads = useSelector((state: RootState) => state.reads.reads);
 
 	function handleOnClick(hash: number) {
 		setBook(hash);

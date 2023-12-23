@@ -12,6 +12,7 @@
 	"dependencies": {
 		"@headlessui/react": "latest",
 		"@heroicons/react": "latest",
+		"@reduxjs/toolkit": "latest",
 		"@vercel/analytics": "latest",
 		"@vercel/speed-insights": "latest",
 		"bungie-api-ts": "latest",
@@ -25,6 +26,7 @@
 		"react-dom": "latest",
 		"react-hot-toast": "latest",
 		"react-icons": "latest",
+		"react-redux": "latest",
 		"react-syntax-highlighter": "latest",
 		"sharp": "latest"
 	},

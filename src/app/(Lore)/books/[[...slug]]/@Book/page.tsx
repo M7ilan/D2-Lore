@@ -8,12 +8,14 @@ import clsx from "clsx";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { bookmarkSVG } from "@/src/icons";
-import { useBookmarks } from "@/src/providers/BookmarksProvider";
-import { useReads } from "@/src/providers/ReadsProvider";
+import { useSelector } from "react-redux";
+import { RootState } from "@/src/redux/store";
 
 export default function BookPage() {
 	const { manifest } = useManifest();
 	const bookContent = useBook();
+	const bookmarks = useSelector((state: RootState) => state.bookmarks.bookmarks);
+	const reads = useSelector((state: RootState) => state.reads.reads);
 	const { node, book, record, setRecord } = useLore();
 	const { isImageLoaded, handleImageLoad } = useImageLoad();
 	const name = bookContent?.displayProperties.name;
@@ -21,8 +23,6 @@ export default function BookPage() {
 	const imageSrc = (image && `https://www.bungie.net${image}`) || "/Black.png";
 	const records = bookContent?.children.records;
 	const bookHash = bookContent?.hash || 0;
-	const { bookmarks } = useBookmarks();
-	const { reads } = useReads();
 
 	function handleOnClick(hash: number) {
 		setRecord(hash);
