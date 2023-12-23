@@ -3,13 +3,44 @@ import { get, set } from "idb-keyval";
 import fetchData from "./fetchData";
 import ToastError from "@/src/components/ToastError";
 import neededComponents from "./neededComponents";
+import { DestinyManifest } from "bungie-api-ts/destiny2";
 
 type ManifestType = AllDestinyManifestComponents & { version: string };
 const MANIFEST_KEY = "Manifest";
 
+export async function GetManifestStatus() {
+	const options = {
+		headers: {
+			"X-API-Key": process.env.NEXT_PUBLIC_API_KEY as string,
+		},
+	};
+
+	const response = await fetchData("https://www.bungie.net/Platform/Destiny2/Manifest/", options);
+
+	return response.Response;
+}
+
+export async function GetManifest() {
+	const manifestUrl = "https://www.bungie.net/Platform/Destiny2/Manifest/";
+
+	const destinyManifest: DestinyManifest = (await fetchData(manifestUrl)).Response;
+	const components = destinyManifest.jsonWorldComponentContentPaths.en;
+
+	const data = {} as AllDestinyManifestComponents & { [key: string]: object | string };
+
+	data.version = destinyManifest.version;
+
+	for (const component of neededComponents) {
+		const componentUrl = `https://www.bungie.net${components[component]}`;
+		data[component] = await fetchData(componentUrl);
+	}
+
+	return data;
+}
+
 async function fetchManifestStatus(): Promise<{ version: string; isApiDown: boolean }> {
 	console.log("🔃 Fetching manifest status...");
-	const response = await fetchData("/api/get-manifest-status");
+	const response = await GetManifestStatus();
 
 	const isApiDown = response.ErrorStatus === "SystemDisabled";
 	if (isApiDown) {
@@ -23,7 +54,7 @@ async function fetchManifestStatus(): Promise<{ version: string; isApiDown: bool
 
 async function fetchAndStoreManifest(): Promise<AllDestinyManifestComponents> {
 	console.log("🔃 Fetching manifest...");
-	const response = await fetchData("/api/get-manifest");
+	const response = await GetManifest();
 	await set(MANIFEST_KEY, response);
 	console.log("✅ Manifest fetched and stored successfully");
 	return response;
