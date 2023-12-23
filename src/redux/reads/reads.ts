@@ -4,8 +4,12 @@ type ReadsState = {
 	reads: NBR[];
 };
 
+let data: string | null = null;
+if (typeof window !== "undefined") {
+	data = localStorage.getItem("Bookmarks");
+}
+
 const loadReads = (): NBR[] => {
-	const data = localStorage.getItem("Reads");
 	return data ? JSON.parse(data) : [];
 };
 
