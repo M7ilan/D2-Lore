@@ -9,7 +9,7 @@ export async function generateMetadata({ params }: { params: { hash: number } })
 
 	const options = {
 		headers: {
-			"X-API-Key": process.env.API_KEY as string,
+			"X-API-Key": process.env.NEXT_PUBLIC_API_KEY as string,
 		},
 	};
 
@@ -34,7 +34,7 @@ export default async function Inspect({ params }: { params: { hash: number } }) 
 
 	const options = {
 		headers: {
-			"X-API-Key": process.env.API_KEY as string,
+			"X-API-Key": process.env.NEXT_PUBLIC_API_KEY as string,
 		},
 	};
 
@@ -80,7 +80,7 @@ export default async function Inspect({ params }: { params: { hash: number } }) 
 // export async function generateStaticParams() {
 // 	const options = {
 // 		headers: {
-// 			"X-API-Key": process.env.API_KEY as string,
+// 			"X-API-Key": process.env.NEXT_PUBLIC_API_KEY as string,
 // 		},
 // 	};
 
