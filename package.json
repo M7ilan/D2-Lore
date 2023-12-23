@@ -10,6 +10,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@headlessui/react": "latest",
 		"@heroicons/react": "latest",
 		"@vercel/analytics": "latest",
 		"@vercel/speed-insights": "latest",
@@ -38,6 +39,7 @@
 		"eslint-config-next": "latest",
 		"postcss": "latest",
 		"prettier": "latest",
+		"sass": "latest",
 		"tailwindcss": "latest",
 		"typescript": "latest"
 	}

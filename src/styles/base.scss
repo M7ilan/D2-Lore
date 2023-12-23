@@ -1,0 +1,43 @@
+* {
+	transition:
+		background-color 300ms,
+		filter 300ms,
+		border-color 300ms;
+
+	border-color: rgb(var(--border));
+	outline: none;
+}
+
+::selection {
+	background-color: rgb(var(--selection));
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgb(var(--border));
+}
+
+body {
+	background-color: rgb(var(--background));
+	color: rgb(var(--text));
+}
+
+.header {
+	@apply font-bold text-lg lg:text-3xl;
+}
+
+.title {
+	@apply font-bold text-base lg:text-xl;
+}
+
+.center {
+	@apply flex items-center justify-center;
+}
+
+.animate {
+	@apply transition-all duration-500;
+}

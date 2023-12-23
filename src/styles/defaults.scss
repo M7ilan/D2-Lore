@@ -1,0 +1,23 @@
+@for $i from 0 through 10 {
+	@layer utilities {
+		.text-default-#{10 * $i} {
+			color: rgba(var(--text), 0.1 * $i);
+		}
+
+		.border-default-#{10 * $i} {
+			border-color: rgba(var(--text), 0.1 * $i);
+		}
+
+		.bg-default-#{10 * $i} {
+			background-color: rgba(var(--text), 0.1 * $i);
+		}
+	}
+}
+
+.bg-default {
+	@apply bg-[rgb(var(--background))];
+}
+
+.bg-default-2 {
+	@apply bg-[rgb(var(--background-2))];
+}

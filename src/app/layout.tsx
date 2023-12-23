@@ -1,10 +1,9 @@
-import "./globals.css";
-import Navbar from "@/src/components/Navbar";
-// import Footer from "@/src/components/Footer";
+import "@/src/styles/globals.scss";
+import Navbar from "@/src/components/Root/Header";
+import Footer from "@/src/components/Root/Footer";
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 import { Inter } from "next/font/google";
-import { ReactNode } from "react";
 import MainProvider from "@/src/providers/MainProvider";
 
 const font = Inter({
@@ -20,32 +19,17 @@ export const metadata: Metadata = {
 
 	description: "The Destiny 2 Lore Library",
 	metadataBase: new URL("https://d2lore.com"),
-
-	icons: [
-		{
-			rel: "icon",
-			type: "image/png",
-			url: "/favicon-dark.png",
-			media: "(prefers-color-scheme: light)",
-		},
-		{
-			rel: "icon",
-			type: "image/png",
-			url: "/favicon-light.png",
-			media: "(prefers-color-scheme: dark)",
-		},
-	],
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en" className="!scroll-smooth" suppressHydrationWarning>
-			<body className={`${font.className} bg-white dark:bg-OpenColor-gray-9 text-OpenColor-gray-7 dark:text-OpenColor-gray-1 antialiased`}>
+			<body className={`${font.className} flex flex-col min-h-screen`}>
 				<Toaster position="top-center" reverseOrder={false} />
 				<MainProvider>
 					<Navbar />
-					<main className="mt-8 pb-16">{children}</main>
-					{/* <Footer /> */}
+					<main className="relative flex-1">{children}</main>
+					<Footer />
 				</MainProvider>
 			</body>
 		</html>

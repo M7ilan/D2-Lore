@@ -1,0 +1,23 @@
+:root {
+	--primary-color: 99, 102, 241;
+	--disabled: 84, 86, 204;
+	--error: 239, 85, 95;
+	--success: 85, 217, 129;
+	--warning: 254, 228, 86;
+}
+
+.dark {
+	--background: 30, 30, 30;
+	--background-2: 35, 35, 35;
+	--text: 248, 249, 250;
+	--border: 60, 60, 60;
+	--selection: 0, 0, 0;
+}
+
+.light {
+	--background: 255, 255, 255;
+	--background-2: 250, 250, 250;
+	--text: 73, 80, 87;
+	--border: 225, 225, 225;
+	--selection: 200, 200, 200;
+}

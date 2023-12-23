@@ -7,9 +7,10 @@ import { AllDestinyManifestComponents } from "bungie-api-ts/destiny2";
 type ManifestContextType = {
 	manifest: AllDestinyManifestComponents | null;
 	isLoading: boolean;
+	setIsLoading: (isLoading: boolean) => void;
 };
 
-const ManifestContext = createContext<ManifestContextType>({ manifest: null, isLoading: true });
+const ManifestContext = createContext<ManifestContextType>({ manifest: null, isLoading: true, setIsLoading: () => {} });
 
 export default function ManifestProvider({ children }: { children: React.ReactNode }) {
 	const [manifest, setManifest] = useState<AllDestinyManifestComponents | null>(null);
@@ -19,13 +20,12 @@ export default function ManifestProvider({ children }: { children: React.ReactNo
 		async function fetchManifest() {
 			const manifestData = await setUpManifest();
 			setManifest(manifestData);
-			setIsLoading(false);
 		}
 
 		fetchManifest();
 	}, []);
 
-	return <ManifestContext.Provider value={{ manifest, isLoading }}>{children}</ManifestContext.Provider>;
+	return <ManifestContext.Provider value={{ manifest, isLoading, setIsLoading }}>{children}</ManifestContext.Provider>;
 }
 
 export const useManifest = () => useContext(ManifestContext);

@@ -7,5 +7,5 @@ import { useManifest } from "./ManifestProvider";
 export default function LoadingProvider() {
 	const { isLoading } = useManifest();
 
-	return <AnimatePresence>{isLoading && <Loading key="loading" />}</AnimatePresence>;
+	return <AnimatePresence>{isLoading && <Loading />}</AnimatePresence>;
 }

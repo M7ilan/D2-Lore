@@ -1,7 +1,7 @@
 import { AllDestinyManifestComponents } from "bungie-api-ts/destiny2";
 import { get, set } from "idb-keyval";
 import fetchData from "./fetchData";
-import ToastError from "../components/ToastError";
+import ToastError from "@/src/components/ToastError";
 import neededComponents from "./neededComponents";
 
 type ManifestType = AllDestinyManifestComponents & { version: string };

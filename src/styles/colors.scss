@@ -1,0 +1,13 @@
+@each $status in error, success, warning {
+	.text-#{$status} {
+		color: rgb(var(--#{$status}));
+	}
+
+	.bg-#{$status} {
+		background-color: rgb(var(--#{$status}));
+	}
+
+	.border-#{$status} {
+		border-color: rgb(var(--#{$status}));
+	}
+}
