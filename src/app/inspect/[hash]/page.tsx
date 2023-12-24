@@ -39,17 +39,17 @@ export async function generateMetadata({ params }: { params: { hash: number } })
 }
 
 // Generate static pages for each item for quick access 
-export async function generateStaticParams() {
-	const options = {
-		headers: {
-			"X-API-Key": process.env.NEXT_PUBLIC_API_KEY as string,
-		},
-	};
+// export async function generateStaticParams() {
+// 	const options = {
+// 		headers: {
+// 			"X-API-Key": process.env.NEXT_PUBLIC_API_KEY as string,
+// 		},
+// 	};
 
-	const destinyManifest: DestinyManifest = (await fetchData("https://www.bungie.net/Platform/Destiny2/Manifest/", options)).Response;
-	const components = destinyManifest.jsonWorldComponentContentPaths.en;
-	const InventoryItemDefinition = await fetchData(`https://www.bungie.net${components["DestinyInventoryItemDefinition"]}`, options);
+// 	const destinyManifest: DestinyManifest = (await fetchData("https://www.bungie.net/Platform/Destiny2/Manifest/", options)).Response;
+// 	const components = destinyManifest.jsonWorldComponentContentPaths.en;
+// 	const InventoryItemDefinition = await fetchData(`https://www.bungie.net${components["DestinyInventoryItemDefinition"]}`, options);
 
-	const hashes = Object.keys(InventoryItemDefinition);
-	return hashes.map((hash) => ({ hash }));
-}
+// 	const hashes = Object.keys(InventoryItemDefinition);
+// 	return hashes.map((hash) => ({ hash }));
+// }
