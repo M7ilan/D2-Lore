@@ -40,14 +40,14 @@ export async function generateMetadata({ params }: { params: { slug: number[] } 
 	if (!book)
 		return {
 			title: nodeName,
+			icons: [
+				{
+					url: `https://www.bungie.net${nodeIcon}`,
+				},
+			],
 			openGraph: {
 				title: nodeName,
-				images: [
-					{
-						url: `https://www.bungie.net${nodeIcon}`,
-						alt: nodeName,
-					},
-				],
+				images: [`https://www.bungie.net${nodeIcon}`],
 			},
 		};
 
@@ -59,12 +59,7 @@ export async function generateMetadata({ params }: { params: { slug: number[] } 
 			title: bookName || nodeName,
 			openGraph: {
 				title: bookName,
-				images: [
-					{
-						url: `https://www.bungie.net${bookIcon || nodeIcon}`,
-						alt: bookName || nodeName,
-					},
-				],
+				images: [`https://www.bungie.net${bookIcon || nodeIcon}`],
 			},
 		};
 
@@ -78,12 +73,7 @@ export async function generateMetadata({ params }: { params: { slug: number[] } 
 		openGraph: {
 			title: loreTitle,
 			description: loreContent,
-			images: [
-				{
-					url: `https://www.bungie.net${bookIcon || nodeIcon}`,
-					alt: bookName || nodeName,
-				},
-			],
+			images: [`https://www.bungie.net${bookIcon || nodeIcon}`],
 		},
 	};
 }
