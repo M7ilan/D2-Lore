@@ -1,31 +1,26 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
-import setUpManifest from "@/src/utils/setUpManifest";
-import { AllDestinyManifestComponents } from "bungie-api-ts/destiny2";
-
-type ManifestContextType = {
-	manifest: AllDestinyManifestComponents | null;
-	isLoading: boolean;
-	setIsLoading: (isLoading: boolean) => void;
-};
-
-const ManifestContext = createContext<ManifestContextType>({ manifest: null, isLoading: true, setIsLoading: () => {} });
+import { includeTables, loadDefs, setApiKey } from "@d2api/manifest-web";
+import { AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import Loading from "@/src/components/Loading";
 
 export default function ManifestProvider({ children }: { children: React.ReactNode }) {
-	const [manifest, setManifest] = useState<AllDestinyManifestComponents | null>(null);
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
-		async function fetchManifest() {
-			const manifestData = await setUpManifest();
-			setManifest(manifestData);
-		}
+		(async () => {
+			console.log("🔃 Loading Manifest...");
+			setApiKey(process.env.NEXT_PUBLIC_API_KEY);
+			includeTables(["Collectible", "InventoryItem", "Lore", "PresentationNode", "Record"]);
+			const definitions = await loadDefs();
 
-		fetchManifest();
+			if (!definitions) throw new Error("definitions failed to load.");
+
+			console.log("✅ Manifest Loaded!");
+			setIsLoading(true);
+		})();
 	}, []);
 
-	return <ManifestContext.Provider value={{ manifest, isLoading, setIsLoading }}>{children}</ManifestContext.Provider>;
+	return <AnimatePresence>{isLoading ? children : <Loading />}</AnimatePresence>;
 }
-
-export const useManifest = () => useContext(ManifestContext);

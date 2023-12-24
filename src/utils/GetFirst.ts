@@ -1,21 +1,21 @@
-import { AllDestinyManifestComponents } from "bungie-api-ts/destiny2";
+import { getLoreDef, getPresentationNodeDef, getRecordDef } from "@d2api/manifest-web";
 
-export function getFirstNode(manifest: AllDestinyManifestComponents | null, node: number) {
-	const lore = manifest?.DestinyPresentationNodeDefinition[node]; // Lore Definition
-	return lore?.children.presentationNodes[0].presentationNodeHash ?? 0;
-}
-
-export function getFirstChildOfNode(manifest: AllDestinyManifestComponents | null, node: number) {
-	const newNode = manifest?.DestinyPresentationNodeDefinition[node];
+export function getFirstNode(node: number) {
+	const newNode = getPresentationNodeDef(node);
 	return newNode?.children.presentationNodes[0].presentationNodeHash ?? 0;
 }
 
-export function getFirstRecord(manifest: AllDestinyManifestComponents | null, book: number) {
-	const records = manifest?.DestinyPresentationNodeDefinition[book]?.children.records;
+export function getFirstChildOfNode(node: number) {
+	const newNode = getPresentationNodeDef(node);
+	return newNode?.children.presentationNodes[0].presentationNodeHash ?? 0;
+}
+
+export function getFirstRecord(book: number) {
+	const records = getPresentationNodeDef(book)?.children.records;
 
 	const firstNonEmptyLoreRecord = records?.find((record) => {
-		const loreHash = manifest?.DestinyRecordDefinition[record.recordHash]?.loreHash;
-		const loreTitle = loreHash && manifest?.DestinyLoreDefinition[loreHash]?.displayProperties.name;
+		const loreHash = getRecordDef(record.recordHash)?.loreHash;
+		const loreTitle = getLoreDef(loreHash)?.displayProperties.name;
 		return loreTitle;
 	});
 

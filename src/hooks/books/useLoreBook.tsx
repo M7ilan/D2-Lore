@@ -1,11 +1,10 @@
 import { useLore } from "@/src/providers/LoreProvider";
-import { useManifest } from "@/src/providers/ManifestProvider";
+import { getLoreDef, getRecordDef } from "@d2api/manifest-web";
 
 export default function useLoreBook() {
-	const { manifest } = useManifest();
 	const { record } = useLore();
-	const loreHash = manifest?.DestinyRecordDefinition[record]?.loreHash;
-	const loreContent = manifest?.DestinyLoreDefinition[loreHash || 0];
+	const loreHash = getRecordDef(record)?.loreHash;
+	const loreContent = getLoreDef(loreHash);
 
 	return loreContent;
 }

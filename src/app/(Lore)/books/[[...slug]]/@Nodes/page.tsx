@@ -2,20 +2,18 @@
 
 import useNodes from "@/src/hooks/books/useLoreNodes";
 import { useLore } from "@/src/providers/LoreProvider";
-import { useManifest } from "@/src/providers/ManifestProvider";
 import { getFirstChildOfNode, getFirstRecord } from "@/src/utils/GetFirst";
 import clsx from "clsx";
 import Image from "next/image";
 
 export default function NodesPage() {
-	const { manifest } = useManifest();
 	const { node, setNode, setBook, setRecord } = useLore();
 	const nodes = useNodes();
 
 	function handleOnClick(hash: number) {
 		setNode(hash);
-		const updatedBook = getFirstChildOfNode(manifest, hash);
-		const updatedRecord = getFirstRecord(manifest, updatedBook);
+		const updatedBook = getFirstChildOfNode(hash);
+		const updatedRecord = getFirstRecord(updatedBook);
 		setBook(updatedBook);
 		setRecord(updatedRecord);
 		window.history.pushState({}, "", `/books/${hash}`);

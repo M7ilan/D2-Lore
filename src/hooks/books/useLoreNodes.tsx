@@ -1,9 +1,8 @@
-import { useManifest } from "@/src/providers/ManifestProvider";
+import { getPresentationNodeDef } from "@d2api/manifest-web";
 
 export default function useLoreNodes() {
-	const { manifest } = useManifest();
-	const lore = manifest?.DestinyPresentationNodeDefinition[4077680549];
-	const nodes = lore?.children.presentationNodes.map((node) => manifest?.DestinyPresentationNodeDefinition[node.presentationNodeHash]);
+	const lore = getPresentationNodeDef(4077680549);
+	const nodes = lore?.children.presentationNodes.map((node) => getPresentationNodeDef(node.presentationNodeHash));
 
 	return nodes;
 }

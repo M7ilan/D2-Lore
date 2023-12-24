@@ -1,11 +1,10 @@
 "use client";
 
 import { useArmor } from "@/src/providers/ArmorProvider";
-import { useManifest } from "@/src/providers/ManifestProvider";
+import { getPresentationNodeDef } from "@d2api/manifest-web";
 
 export default function ClassPage() {
-	const { manifest } = useManifest();
 	const { node } = useArmor();
 
-	return <div className="header">{manifest?.DestinyPresentationNodeDefinition[node]?.displayProperties.name}</div>;
+	return <div className="header">{getPresentationNodeDef(node)?.displayProperties.name}</div>;
 }

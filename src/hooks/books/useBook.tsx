@@ -1,10 +1,9 @@
 import { useLore } from "@/src/providers/LoreProvider";
-import { useManifest } from "@/src/providers/ManifestProvider";
+import { getPresentationNodeDef } from "@d2api/manifest-web";
 
 export default function useBook() {
-	const { manifest } = useManifest();
 	const { book } = useLore();
-  const bookContent = manifest?.DestinyPresentationNodeDefinition[book];
+	const bookContent = getPresentationNodeDef(book);
 
-	return bookContent
+	return bookContent;
 }

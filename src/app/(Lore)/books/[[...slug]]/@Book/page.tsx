@@ -3,16 +3,15 @@
 import useBook from "@/src/hooks/books/useBook";
 import useImageLoad from "@/src/hooks/useImageLoad";
 import { useLore } from "@/src/providers/LoreProvider";
-import { useManifest } from "@/src/providers/ManifestProvider";
 import clsx from "clsx";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { bookmarkSVG } from "@/src/icons";
 import { useSelector } from "react-redux";
 import { RootState } from "@/src/redux/store";
+import { getLoreDef, getRecordDef } from "@d2api/manifest-web";
 
 export default function BookPage() {
-	const { manifest } = useManifest();
 	const bookContent = useBook();
 	const bookmarks = useSelector((state: RootState) => state.bookmarks.bookmarks);
 	const reads = useSelector((state: RootState) => state.reads.reads);
@@ -40,8 +39,8 @@ export default function BookPage() {
 			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.3 }} className="grid grid-cols-[repeat(auto-fill,40px)] w-full justify-start gap-2">
 				{records
 					?.filter((recordId) => {
-						const loreHash = manifest?.DestinyRecordDefinition[recordId.recordHash]?.loreHash;
-						const loreTitle = loreHash && manifest?.DestinyLoreDefinition[loreHash]?.displayProperties.name;
+						const loreHash = getRecordDef(recordId.recordHash)?.loreHash;
+						const loreTitle = loreHash && getLoreDef(loreHash)?.displayProperties.name;
 						return loreTitle;
 					})
 					.map((recordDiff, index) => {

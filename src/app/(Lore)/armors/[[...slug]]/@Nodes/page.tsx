@@ -2,19 +2,17 @@
 
 import useArmorNodes from "@/src/hooks/armors/useArmorNodes";
 import { useArmor } from "@/src/providers/ArmorProvider";
-import { useManifest } from "@/src/providers/ManifestProvider";
 import { getFirstChildOfNode } from "@/src/utils/GetFirst";
 import clsx from "clsx";
 import Image from "next/image";
 
 export default function NodesPage() {
-	const { manifest } = useManifest();
 	const { node, setNode, setCategory } = useArmor();
 	const nodes = useArmorNodes();
 
 	function handleOnClick(hash: number) {
 		setNode(hash);
-		const updatedCategory = getFirstChildOfNode(manifest, hash);
+		const updatedCategory = getFirstChildOfNode(hash);
 		setCategory(updatedCategory);
 		window.history.pushState({}, "", `/armors/${hash}`);
 	}

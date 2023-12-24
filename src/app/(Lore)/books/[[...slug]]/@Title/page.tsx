@@ -1,11 +1,10 @@
 "use client";
 
 import { useLore } from "@/src/providers/LoreProvider";
-import { useManifest } from "@/src/providers/ManifestProvider";
+import { getPresentationNodeDef } from "@d2api/manifest-web";
 
 export default function TitlePage() {
-	const { manifest } = useManifest();
 	const { node } = useLore();
 
-	return <div className="header">{manifest?.DestinyPresentationNodeDefinition[node]?.displayProperties.name}</div>;
+	return <div className="header">{getPresentationNodeDef(node)?.displayProperties.name}</div>;
 }

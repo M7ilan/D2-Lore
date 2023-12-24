@@ -2,18 +2,17 @@
 
 import FullItemIcon from "@/src/components/FullItemIcon";
 import useCategory from "@/src/hooks/armors/useCategory";
-import { useManifest } from "@/src/providers/ManifestProvider";
+import { getCollectibleDef, getPresentationNodeDef } from "@d2api/manifest-web";
 import Link from "next/link";
 
 export default function ArmorsPage() {
-	const { manifest } = useManifest();
 	const categoryContent = useCategory();
 	const categoryChildren = categoryContent?.children?.presentationNodes;
 
 	return (
 		<div className="grid gap-8">
 			{categoryChildren?.map((child) => {
-				const suit = manifest?.DestinyPresentationNodeDefinition[child?.presentationNodeHash];
+				const suit = getPresentationNodeDef(child?.presentationNodeHash);
 				const suitName = suit?.displayProperties.name;
 				const childHash = suit?.hash || 0;
 				const suitChildren = suit?.children.collectibles;
@@ -22,7 +21,7 @@ export default function ArmorsPage() {
 					<div key={childHash} className="flex gap-2 items-center text-center border-2">
 						{suitChildren?.map((child) => {
 							const childHash = child?.collectibleHash || 0;
-							const armor = manifest?.DestinyCollectibleDefinition[childHash];
+							const armor = getCollectibleDef(childHash);
 							const itemHash = armor?.itemHash || 0;
 							const bungieURL = "https://www.bungie.net";
 							const icon = bungieURL + armor?.displayProperties.icon;

@@ -10,6 +10,8 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@d2api/manifest-react": "latest",
+		"@d2api/manifest-web": "latest",
 		"@headlessui/react": "latest",
 		"@heroicons/react": "latest",
 		"@reduxjs/toolkit": "latest",

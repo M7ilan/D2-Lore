@@ -1,10 +1,9 @@
-import { useManifest } from "@/src/providers/ManifestProvider";
 import { useArmor } from "@/src/providers/ArmorProvider";
+import { getPresentationNodeDef } from "@d2api/manifest-web";
 
 export default function useCatagories() {
-	const { manifest } = useManifest();
 	const { node } = useArmor();
-	const categories = manifest?.DestinyPresentationNodeDefinition[node]?.children.presentationNodes.map((category) => manifest?.DestinyPresentationNodeDefinition[category.presentationNodeHash]);
+	const categories = getPresentationNodeDef(node)?.children.presentationNodes.map((category) => getPresentationNodeDef(category.presentationNodeHash));
 
 	return categories;
 }
