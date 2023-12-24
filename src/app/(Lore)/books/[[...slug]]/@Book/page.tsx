@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: { params: { slug: number[] } 
 	const record: DestinyRecordDefinition = RecordDefinition[recordHash];
 
 	const nodeName = node.displayProperties.name;
-	const nodeIcon = node.displayProperties.icon;
+	// const nodeIcon = node.displayProperties.icon;
 
 	if (!book)
 		return {
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: { params: { slug: number[] } 
 		};
 
 	const bookName = book.displayProperties.name;
-	const bookIcon = book.displayProperties.iconSequences[1].frames[0];
+	// const bookIcon = book.displayProperties.iconSequences[1].frames[0];
 
 	if (!record)
 		return {
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: { params: { slug: number[] } 
 	const loreHash = record.loreHash || 0;
 	const lore: DestinyLoreDefinition = LoreDefinition[loreHash];
 	const loreTitle = lore?.displayProperties.name;
-	const loreContent = lore?.displayProperties.description;
+	// const loreContent = lore?.displayProperties.description;
 
 	return {
 		title: loreTitle || bookName || nodeName,
