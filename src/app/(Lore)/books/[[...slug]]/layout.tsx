@@ -1,7 +1,10 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Books",
+	title: {
+		default: "D2 Lore",
+		template: "%s | D2L",
+	},
 	description: "Books Library",
 };
 

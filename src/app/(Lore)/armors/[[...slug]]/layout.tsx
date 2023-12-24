@@ -1,7 +1,10 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Armors",
+	title: {
+		default: "D2 Lore",
+		template: "%s | D2L",
+	},
 	description: "Armors Library",
 };
 
