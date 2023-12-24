@@ -22,5 +22,5 @@ export default function ManifestProvider({ children }: { children: React.ReactNo
 		})();
 	}, []);
 
-	return <AnimatePresence>{isLoading ? children : <Loading />}</AnimatePresence>;
+	return <AnimatePresence>{isLoading ? children : <Loading key={"Loading"} />}</AnimatePresence>;
 }
