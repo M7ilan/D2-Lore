@@ -5,25 +5,22 @@ import useImageLoad from "@/src/hooks/useImageLoad";
 import clsx from "clsx";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { useLore } from "@/src/providers/LoreProvider";
-import { getFirstRecord } from "@/src/utils/GetFirst";
 import { bookmarkSVG } from "@/src/icons";
 import { useSelector } from "react-redux";
 import { RootState } from "@/src/redux/store";
+import Link from "next/link";
+import { getFirstChildOfNode, getFirstNode } from "@/src/utils/GetFirst";
 
-export default function BooksPage() {
-	const books = useBooks();
-	const { node, book, setBook, setRecord } = useLore();
+export default function Books({ params }: { params: { slug: string[] } }) {
+	const nodeSlug = Number(params?.slug?.[0]) || 0;
+	const bookSlug = Number(params?.slug?.[1]) || 0;
+	const node = nodeSlug || getFirstNode(4077680549);
+	const book = bookSlug || getFirstChildOfNode(node);
+
+	const books = useBooks(node);
 	const { isImageLoaded, handleImageLoad } = useImageLoad();
 	const bookmarks = useSelector((state: RootState) => state.bookmarks.bookmarks);
 	const reads = useSelector((state: RootState) => state.reads.reads);
-
-	function handleOnClick(hash: number) {
-		setBook(hash);
-		const updatedRecord = getFirstRecord(hash);
-		setRecord(updatedRecord);
-		window.history.pushState({}, "", `/books/${node}/${hash}`);
-	}
 
 	return (
 		<div className="grid grid-cols-3 gap-4">
@@ -37,7 +34,7 @@ export default function BooksPage() {
 				const read = currentBookReads == currentBookRecords;
 
 				return (
-					<div onClick={() => handleOnClick(bookHash)} key={bookHash}>
+					<Link key={bookHash} href={`/books/${node}/${bookHash}`}>
 						<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05, duration: 0.3 }} className="relative book">
 							<Image unoptimized quality={100} onLoad={() => handleImageLoad(bookHash)} src={`https://www.bungie.net${bookDiff?.displayProperties.iconSequences?.[1].frames[0]}`} width={359} height={460} alt={name} className={clsx("book", { "opacity-100": isImageLoaded[bookHash], "opacity-0": !isImageLoaded[bookHash] })} />
 							<AnimatePresence>{read && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute w-8 h-8 -left-4 -top-4 opacity-90 bg-warning rotate-45"></motion.div>}</AnimatePresence>
@@ -50,7 +47,7 @@ export default function BooksPage() {
 							</AnimatePresence>
 						</motion.div>
 						<div className={clsx("w-full h-1 rounded-full bg-default-100 mt-2 opacity-0 transition-opacity duration-300", { "opacity-100": book == bookHash })}></div>
-					</div>
+					</Link>
 				);
 			})}
 		</div>

@@ -1,8 +1,6 @@
-import { useLore } from "@/src/providers/LoreProvider";
 import { getPresentationNodeDef } from "@d2api/manifest-web";
 
-export default function useBook() {
-	const { book } = useLore();
+export default function useBook(book: number) {
 	const bookContent = getPresentationNodeDef(book);
 
 	return bookContent;

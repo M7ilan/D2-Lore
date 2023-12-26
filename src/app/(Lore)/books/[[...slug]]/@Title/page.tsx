@@ -1,10 +1,32 @@
 "use client";
 
-import { useLore } from "@/src/providers/LoreProvider";
+import { getFirstNode } from "@/src/utils/GetFirst";
 import { getPresentationNodeDef } from "@d2api/manifest-web";
+import { motion } from "framer-motion";
+import { memo } from "react";
 
-export default function TitlePage() {
-	const { node } = useLore();
+type TitleProps = {
+	params: {
+		slug: string[];
+	};
+};
 
-	return <div className="header">{getPresentationNodeDef(node)?.displayProperties.name}</div>;
+function Title({ params }: TitleProps) {
+	console.log("Title rendered");
+
+	const nodeSlug = Number(params?.slug?.[0]) || 0;
+	const node = nodeSlug || getFirstNode(4077680549);
+	const name = getPresentationNodeDef(node)?.displayProperties.name;
+
+	return (
+		<motion.div initial={{ x: -10 }} animate={{ x: 0 }} className="header">
+			{name}
+		</motion.div>
+	);
 }
+
+export default memo(Title, (prevProps, nextProps) => {
+	console.log("Title memo");
+
+	return prevProps.params.slug[0] === nextProps.params.slug[0];
+});
