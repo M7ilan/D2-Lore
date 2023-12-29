@@ -2,9 +2,25 @@ export default function LoadingIcon({ className, size }: { className?: string; s
 	size = size || 32;
 
 	return (
-		<svg className={`animate-spin -ml-1 mr-3 text-default-80 ${className}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" style={{ width: size, height: size }}>
-			<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-			<path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-		</svg>
+		<div className={`spinner ${className}`} style={{ width: size, height: size }}>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62.08 71.68" fill="currentColor">
+				<g>
+					<polygon className="a" points="30.04 59.7 10.87 48.64 1 54.34 30.04 71.1 30.04 59.7"></polygon>
+					<polygon className="e" points="1 17.34 10.87 23.04 30.04 11.97 30.04 0.58 1 17.34"></polygon>
+					<polygon className="f" points="9.87 46.91 9.87 24.77 0 19.07 0 52.6 9.87 46.91"></polygon>
+					<polygon className="d" points="32.04 0.58 32.04 11.97 51.2 23.04 61.08 17.34 32.04 0.58"></polygon>
+					<polygon className="b" points="61.08 54.34 51.2 48.64 32.04 59.7 32.04 71.1 61.08 54.34"></polygon>
+					<polygon className="c" points="52.2 24.77 52.2 46.91 62.08 52.6 62.08 19.07 52.2 24.77"></polygon>
+				</g>
+				<g>
+					<polygon className="c" points="21.8 29.35 30.04 24.59 30.04 14.32 12.9 24.21 21.8 29.35"></polygon>
+					<polygon className="b" points="20.8 40.6 20.8 31.08 11.9 25.95 11.9 45.73 20.8 40.6"></polygon>
+					<polygon className="d" points="32.04 14.32 32.04 24.59 40.28 29.35 49.17 24.21 32.04 14.32"></polygon>
+					<polygon className="e" points="41.28 31.08 41.28 40.6 50.17 45.73 50.17 25.95 41.28 31.08"></polygon>
+					<polygon className="a" points="30.04 47.09 21.8 42.33 12.9 47.47 30.04 57.36 30.04 47.09"></polygon>
+					<polygon className="f" points="40.28 42.33 32.04 47.09 32.04 57.36 49.17 47.47 40.28 42.33"></polygon>
+				</g>
+			</svg>
+		</div>
 	);
 }

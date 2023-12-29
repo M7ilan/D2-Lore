@@ -4,9 +4,9 @@ import Logo from "@/src/components/Logo";
 
 export default function Hero() {
 	return (
-		<div className="relative isolate py-32 mx-2">
-			<div className="mx-auto max-w-2xl">
-				<div className="hidden sm:mb-8 sm:flex sm:justify-center">
+		<div className="relative isolate py-16 mx-2">
+			<div className="mx-auto max-w-2xl center flex-col">
+				<div className="hidden sm:mb-4 sm:flex sm:justify-center">
 					<Link href="https://beta.d2lore.com" className="flex items-center gap-2 relative rounded-full px-3 py-1 text-sm leading-6 border-button border-default-100">
 						Give Beta Version a Try!
 						<PingIcon />

@@ -1,0 +1,38 @@
+.spinner {
+	opacity: 0.5;
+}
+
+@keyframes fadeInOut {
+	0%, 50% { opacity: 0 }
+	20% { opacity: 1 }
+}
+
+$global-base-delay: 1500ms;
+@mixin animate-letter($order, $delayed: 0) {
+  $base-delay: $global-base-delay; // Use global base delay by default
+  @if $delayed == 1 {
+    $base-delay: $global-base-delay * 2;
+  }
+  $delay-increment: $base-delay / 6; 
+  $animation-delay: $delay-increment * ($order - 1);
+  opacity: 0;
+  animation: fadeInOut $base-delay infinite $animation-delay ease-in-out;
+}
+
+.spinner {
+  .a { @include animate-letter(1); }
+  .b { @include animate-letter(2); }
+  .c { @include animate-letter(3); }
+  .d { @include animate-letter(4); }
+  .e { @include animate-letter(5); }
+  .f { @include animate-letter(6); }
+
+  g:nth-child(1) {
+    .a { @include animate-letter(1, 1); }
+    .b { @include animate-letter(2, 1); }
+    .c { @include animate-letter(3, 1); }
+    .d { @include animate-letter(4, 1); }
+    .e { @include animate-letter(5, 1); }
+    .f { @include animate-letter(6, 1); }
+  }
+}
