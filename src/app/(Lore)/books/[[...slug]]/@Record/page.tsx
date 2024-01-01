@@ -1,24 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import useLoreBook from "@/src/hooks/books/useLoreBook";
 import clsx from "clsx";
 import { motion } from "framer-motion";
-import { HiBookmark, HiCheck, HiShare } from "react-icons/hi";
+import { HiBookmark, } from "react-icons/hi";
 import { RootState } from "@/src/redux/store";
 import useBookmarksUpdate from "@/src/hooks/books/useBookmarksUpdate";
 import useReadsUpdate from "@/src/hooks/books/useReadsUpdate";
-import { getFirstChildOfNode, getFirstNode, getFirstRecord } from "@/src/utils/GetFirst";
+import { useLore } from "@/src/providers/LoreProvider";
 
-export default function Record({ params }: { params: { slug: string[] } }) {
-	const nodeSlug = Number(params?.slug?.[0]) || 0;
-	const bookSlug = Number(params?.slug?.[1]) || 0;
-	const recordSlug = Number(params?.slug?.[2]) || 0;
-
-	const node = nodeSlug || getFirstNode(4077680549);
-	const book = bookSlug || getFirstChildOfNode(node);
-	const record = recordSlug || getFirstRecord(book);
+export default function Record() {
+	const { node, book, record } = useLore();
 
 	const loreContent = useLoreBook(record);
 	const bookmarks = useSelector((state: RootState) => state.bookmarks.bookmarks);
@@ -27,25 +20,16 @@ export default function Record({ params }: { params: { slug: string[] } }) {
 	const bookmarked = bookmarks.find((bookmark) => bookmark.record === record);
 	const reads = useSelector((state: RootState) => state.reads.reads);
 	const read = reads.find((read) => read.record === record);
-	const [copied, setCopied] = useState(false);
-
-	function copyLink() {
-		navigator.clipboard.writeText(window.location.origin + `/books/${node}/${book}/${record}`);
-		setCopied(true);
-		setTimeout(() => setCopied(false), 2000);
-	}
 
 	return (
-		<div key={record} className="grid grid-rows-[min-content_1fr] gap-8 lg:border-l-2 lg:pl-8">
-			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.3 }} className="border-y-2 flex items-center title py-5 justify-between">
+		<div id={`Record`} key={record} className="grid grid-rows-[min-content_1fr] gap-8 lg:border-l-2 lg:pl-8 scroll-m-4">
+			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.3 }} className="border-y-2 flex items-center subtitle py-5 justify-between">
 				<div className="flex gap-2">
-					<div className="h-6 w-6"></div>
 					<div className="h-6 w-6"></div>
 				</div>
 				{loreContent?.displayProperties.name}
 				<div className="flex gap-2">
 					<HiBookmark onClick={() => updateBookmarks(node, book, record)} className={clsx("w-6 h-6 cursor-pointer animate", { "opacity-100": bookmarked, "opacity-25": !bookmarked })} />
-					{copied ? <HiCheck className="w-6 h-6 animate" /> : <HiShare onClick={copyLink} className="w-6 h-6 cursor-pointer" />}
 				</div>
 			</motion.div>
 			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.3 }} className="dark:text-default-60 whitespace-pre-line">

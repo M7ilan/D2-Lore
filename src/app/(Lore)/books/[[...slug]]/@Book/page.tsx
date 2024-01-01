@@ -9,17 +9,10 @@ import { bookmarkSVG } from "@/src/icons";
 import { useSelector } from "react-redux";
 import { RootState } from "@/src/redux/store";
 import { getLoreDef, getRecordDef } from "@d2api/manifest-web";
-import { getFirstChildOfNode, getFirstNode, getFirstRecord } from "@/src/utils/GetFirst";
-import Link from "next/link";
+import { useLore } from "@/src/providers/LoreProvider";
 
-export default function Book({ params }: { params: { slug: string[] } }) {
-	const nodeSlug = Number(params?.slug?.[0]) || 0;
-	const bookSlug = Number(params?.slug?.[1]) || 0;
-	const recordSlug = Number(params?.slug?.[2]) || 0;
-
-	const node = nodeSlug || getFirstNode(4077680549);
-	const book = bookSlug || getFirstChildOfNode(node);
-	const record = recordSlug || getFirstRecord(book);
+export default function Book() {
+	const { node, book, record, setRecord } = useLore();
 
 	const bookContent = useBook(book);
 	const bookmarks = useSelector((state: RootState) => state.bookmarks.bookmarks);
@@ -31,9 +24,14 @@ export default function Book({ params }: { params: { slug: string[] } }) {
 	const records = bookContent?.children.records;
 	const bookHash = bookContent?.hash || 0;
 
+	function handleOnClick(recordHash: number) {
+		setRecord(recordHash);
+		window.history.pushState({}, "", `/books/${node}/${book}/${recordHash}`);
+	}
+
 	return (
 		<div key={book} className="grid gap-8 content-start h-full">
-			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.3 }} className="border-y-2 center title py-5 text-center">
+			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.3 }} className="border-y-2 center subtitle py-5 text-center">
 				{name}
 			</motion.div>
 			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.3 }}>
@@ -52,7 +50,7 @@ export default function Book({ params }: { params: { slug: string[] } }) {
 						const read = reads.find((read) => read.record == recordHash);
 
 						return (
-							<Link key={recordHash} href={`/books/${node}/${book}/${recordHash}`}>
+							<div key={recordHash} onClick={() => handleOnClick(recordHash)}>
 								<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1, duration: 0.3 }} className={clsx("node w-[40px] h-[40px]", { active: record == recordHash, "!bg-default-0": read })}>
 									{index + 1}
 									<AnimatePresence>
@@ -63,7 +61,7 @@ export default function Book({ params }: { params: { slug: string[] } }) {
 										)}
 									</AnimatePresence>
 								</motion.div>
-							</Link>
+							</div>
 						);
 					})}
 			</motion.div>

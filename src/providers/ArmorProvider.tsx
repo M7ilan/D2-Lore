@@ -19,9 +19,14 @@ export default function ArmorProvider({ children }: { children: React.ReactNode 
 
 	// Parse URL parameters
 	const path = usePathname();
+	const currectPage = path.split("/")[1];
 	const params = path.split("/").slice(2);
-	const nodeSlug = Number(params[0]);
-	const categorySlug = Number(params[1]);
+	let nodeSlug = 0;
+	let categorySlug = 0;
+	if (currectPage == "armors") {
+		nodeSlug = Number(params[0]);
+		categorySlug = Number(params[1]);
+	}
 
 	// Set state from URL params or defaults on component mount or manifest change
 	useEffect(() => {

@@ -18,7 +18,7 @@ export default function CategoriesPage() {
 			{categories?.map((categoryDiff) => {
 				const categoryHash = categoryDiff?.hash || 0;
 				return (
-					<div onClick={() => handleOnClick(categoryHash)} key={categoryHash} className={clsx("node p-2 title", { active: categoryHash == category })}>
+					<div onClick={() => handleOnClick(categoryHash)} key={categoryHash} className={clsx("node p-2 subtitle", { active: categoryHash == category })}>
 						{categoryDiff?.displayProperties.name}
 					</div>
 				);

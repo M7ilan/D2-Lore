@@ -4,6 +4,7 @@ import FullItemIcon from "@/src/components/FullItemIcon";
 import useCategory from "@/src/hooks/armors/useCategory";
 import { getCollectibleDef, getPresentationNodeDef } from "@d2api/manifest-web";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function ArmorsPage() {
 	const categoryContent = useCategory();
@@ -11,14 +12,14 @@ export default function ArmorsPage() {
 
 	return (
 		<div className="grid gap-8">
-			{categoryChildren?.map((child) => {
+			{categoryChildren?.map((child, index) => {
 				const suit = getPresentationNodeDef(child?.presentationNodeHash);
 				const suitName = suit?.displayProperties.name;
 				const childHash = suit?.hash || 0;
 				const suitChildren = suit?.children.collectibles;
 
 				return (
-					<div key={childHash} className="flex gap-2 items-center text-center border-2">
+					<motion.div key={childHash} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1}} className="flex gap-2 items-center text-center border-2">
 						{suitChildren?.map((child) => {
 							const childHash = child?.collectibleHash || 0;
 							const armor = getCollectibleDef(childHash);
@@ -32,8 +33,8 @@ export default function ArmorsPage() {
 								</Link>
 							);
 						})}
-						<div className="title text-end pr-4 flex-1">{suitName}</div>
-					</div>
+						<div className="text-end pr-4 flex-1 subtitle">{suitName}</div>
+					</motion.div>
 				);
 			})}
 		</div>

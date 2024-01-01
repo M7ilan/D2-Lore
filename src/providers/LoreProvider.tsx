@@ -22,10 +22,16 @@ export default function LoreProvider({ children }: { children: React.ReactNode }
 
 	// Parse URL parameters
 	const path = usePathname();
+	const currectPage = path.split("/")[1];
 	const params = path.split("/").slice(2);
-	const nodeSlug = Number(params[0]);
-	const bookSlug = Number(params[1]);
-	const recordSlug = Number(params[2]);
+	let nodeSlug = 0;
+	let bookSlug = 0;
+	let recordSlug = 0;
+	if (currectPage == "books") {
+		nodeSlug = Number(params[0]);
+		bookSlug = Number(params[1]);
+		recordSlug = Number(params[2]);
+	}
 
 	// Set state from URL params or defaults on component mount or manifest change
 	useEffect(() => {

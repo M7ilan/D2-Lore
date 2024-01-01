@@ -26,14 +26,14 @@ export default function Component({ params }: { params: { hash: number } }) {
 			<div className="flex gap-4 items-center">
 				<FullItemIcon id={loreHash} iconSrc={icon} watermarkSrc={watermark} className="border-2 border-default-50" />
 				<div className="flex flex-col">
-					<div className="header">{name}</div>
+					<div className="title">{name}</div>
 					<div className="text-default-50">
 						{classType} {itemType}
 					</div>
 				</div>
 			</div>
 			<div className="grid grid-rows-[min-content_1fr] gap-8">
-				<div className="title whitespace-pre-line">{flavorText}</div>
+				<div className="subtitle whitespace-pre-line">{flavorText}</div>
 				<div className="text-default-60 whitespace-pre-line">{loreDescription}</div>
 			</div>
 		</div>

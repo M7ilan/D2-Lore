@@ -38,7 +38,10 @@ export async function generateMetadata({ params }: { params: { hash: number } })
 	};
 }
 
-// Generate static pages for each item for quick access 
+
+// IMPORTANT THERE'S MORE THAN 25K ITEM.
+
+// Generate static pages for each item for quick access
 // export async function generateStaticParams() {
 // 	const options = {
 // 		headers: {
