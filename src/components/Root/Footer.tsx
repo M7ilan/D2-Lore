@@ -1,21 +1,21 @@
 // import Link from "next/link";
 import Link from "next/link";
-import Logo from "@/src/components/Logo";
-import Image from "next/image";
+import Logo from "@/src/icons/Logo";
+import BrandName from "@/src/icons/BrandName";
 // import Socials from "./Socials";
 
 export default function Footer() {
 	const year = new Date().getFullYear();
 
 	return (
-		<footer className="p-8 bg-default-2">
+		<footer className="p-8 bg-opacity-97">
 			<div className="xl:grid grid-cols-3 gap-8">
 				<div className="flex flex-col gap-4">
 					<div className="flex gap-4">
-						<Image quality={100} priority src="/Logo.png" className="w-24 h-24 p-2 opacity-80 dark:opacity-100 invert dark:invert-0" width={344} height={344} alt="Logo" />
+						<Logo className="w-12 h-12" />
 						<div>
-							<Logo className="text-4xl" />
-							<div className="text-sm text-default-60">
+							<BrandName className="text-4xl" />
+							<div className="text-sm text-opacity-60">
 								<p className="leading-8">The Destiny 2 Lore Library.</p>
 								<p>
 									&copy; {year}{" "}

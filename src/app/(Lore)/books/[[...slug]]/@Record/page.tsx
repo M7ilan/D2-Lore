@@ -32,7 +32,7 @@ export default function Record() {
 					<HiBookmark onClick={() => updateBookmarks(node, book, record)} className={clsx("w-6 h-6 cursor-pointer animate", { "opacity-100": bookmarked, "opacity-25": !bookmarked })} />
 				</div>
 			</motion.div>
-			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.3 }} className="dark:text-default-60 whitespace-pre-line">
+			<motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.3 }} className="dark:text-opacity-60 whitespace-pre-line">
 				{loreContent?.displayProperties.description}
 			</motion.div>
 			<motion.button initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.3 }} onClick={() => updateReads(node, book, record)} className="secondary-button">

@@ -4,7 +4,7 @@ import useCatagories from "@/src/hooks/armors/useCategories";
 import { useArmor } from "@/src/providers/ArmorProvider";
 import clsx from "clsx";
 
-export default function CategoriesPage() {
+export default function Categories() {
 	const { node, category, setCategory } = useArmor();
 	const categories = useCatagories();
 

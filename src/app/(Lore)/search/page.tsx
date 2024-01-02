@@ -1,4 +1,4 @@
-export default function SearchPage() {
+export default function Search() {
 	return (
 		<div>
 			<div className="center header">Search</div>

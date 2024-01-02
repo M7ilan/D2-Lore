@@ -21,7 +21,7 @@ export default function SwitchThemeButton() {
 	}, []);
 
 	return (
-		<button onClick={ChangeTheme} className="!p-2 secondary-button">
+		<button onClick={ChangeTheme} className="!p-2 secondary-button hover:text-opacity-100 animate">
 			{isClient ? theme === "dark" ? <SunIcon className="h-6 w-6" /> : <MoonIcon className="h-6 w-6" /> : <div className="h-6 w-6"></div>}
 		</button>
 	);

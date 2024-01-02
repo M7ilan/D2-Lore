@@ -27,8 +27,8 @@ export default function Nodes() {
 				const icon = `https://www.bungie.net${nodeDiff?.displayProperties.icon}`;
 
 				return (
-					<div onClick={() => handleOnClick(nodeHash)} key={nodeHash} className={clsx("node p-2 invert dark:invert-0", { active: node == nodeHash })}>
-						<Image src={icon} width={84} height={84} alt={name} className="w-[60px] " />
+					<div onClick={() => handleOnClick(nodeHash)} key={nodeHash} className={clsx("node", { active: node == nodeHash })}>
+						<Image src={icon} width={84} height={84} alt={name} className={clsx("invert dark:invert-0", { "opacity-100": node == nodeHash, "opacity-60": node !== nodeHash })} />
 					</div>
 				);
 			})}

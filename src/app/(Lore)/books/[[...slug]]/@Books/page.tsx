@@ -5,12 +5,12 @@ import useImageLoad from "@/src/hooks/useImageLoad";
 import clsx from "clsx";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { bookmarkSVG } from "@/src/icons";
 import { useSelector } from "react-redux";
 import { RootState } from "@/src/redux/store";
 import { useLore } from "@/src/providers/LoreProvider";
 import { getFirstRecord } from "@/src/utils/GetFirst";
 import useIsSmallScreen from "@/src/hooks/useIsSmallScreen";
+import Bookmark from "@/src/icons/Bookmark";
 
 export default function Books() {
 	const { node, book, setBook, setRecord } = useLore();
@@ -51,13 +51,13 @@ export default function Books() {
 							<AnimatePresence>{read && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute w-8 h-8 -left-4 -top-4 opacity-90 bg-warning rotate-45"></motion.div>}</AnimatePresence>
 							<AnimatePresence>
 								{bookmarked && (
-									<motion.div style={{ overflow: "hidden" }} initial={{ height: 0 }} animate={{ height: 100 }} exit={{ height: 0 }} transition={{ duration: 0.5 }} className="absolute w-4 right-2 top-0 opacity-90">
-										<Image src={bookmarkSVG} width={1080} height={1080} alt="bookmark" />
+									<motion.div style={{ overflow: "hidden" }} initial={{ height: 0 }} animate={{ height: 100 }} exit={{ height: 0 }} transition={{ duration: 0.5 }} className="absolute w-4 right-2 top-0">
+										<Bookmark className="text-error" />
 									</motion.div>
 								)}
 							</AnimatePresence>
 						</motion.div>
-						<div className={clsx("w-full h-1 rounded-full bg-default-100 mt-2 opacity-0 transition-opacity duration-300", { "opacity-100": book == bookHash })}></div>
+						<div className={clsx("w-full h-1 rounded-full opacity-0 mt-2 transition-opacity duration-300 active-book", { "opacity-100": book == bookHash })}></div>
 					</div>
 				);
 			})}

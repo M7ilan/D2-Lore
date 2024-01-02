@@ -4,12 +4,13 @@
 		filter 300ms,
 		border-color 300ms;
 
-	border-color: rgb(var(--border));
+	border-color: rgba(var(--foreground), 0.1);
 	outline: none;
 }
 
 ::selection {
-	background-color: rgb(var(--selection));
+	background-color: rgb(var(--foreground), 0.2);
+	color: rgb(var(--foreground));
 }
 
 ::-webkit-scrollbar {
@@ -18,24 +19,24 @@
 }
 
 ::-webkit-scrollbar-thumb {
-	background: rgb(var(--border));
+	background: rgb(var(--foreground), 0.1);
 }
 
 body {
 	background-color: rgb(var(--background));
-	color: rgb(var(--text));
+	color: rgb(var(--foreground), 0.8);
 }
 
 .header {
-	@apply font-bold text-4xl lg:text-6xl;
+	@apply font-bold text-4xl lg:text-6xl text-opacity-100;
 }
 
 .title {
-	@apply font-bold text-2xl lg:text-4xl;
+	@apply font-bold text-2xl lg:text-4xl text-opacity-100;
 }
 
 .subtitle {
-	@apply font-bold text-lg lg:text-2xl;
+	@apply font-bold text-lg lg:text-2xl text-opacity-100;
 }
 
 .center {
@@ -44,4 +45,16 @@ body {
 
 .animate {
 	@apply transition-all duration-300;
+}
+
+@layer utilities {
+	@for $i from 0 through 100 {
+		.text-opacity-#{$i} {
+			color: rgba(var(--foreground), $i / 100);
+		}
+
+		.bg-opacity-#{$i} {
+			background-color: color-mix(in srgb, rgb(var(--background)) $i * 1%, rgb(var(--foreground)));
+		}
+	}
 }

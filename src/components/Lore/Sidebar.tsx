@@ -1,11 +1,11 @@
 "use client";
 
 import clsx from "clsx";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { helmetSVG, bookSVG } from "@/src/icons";
 import Link from "next/link";
-import { HiSearch } from "react-icons/hi";
+import Book from "@/src/icons/Book";
+import Helmet from "@/src/icons/Helmet";
+import Search from "@/src/icons/Search";
 
 export default function Sidebar() {
 	const path = usePathname();
@@ -15,25 +15,25 @@ export default function Sidebar() {
 		{
 			name: "Books",
 			path: "books",
-			icon: bookSVG,
+			icon: <Book className="w-12 h-12 p-1" />,
 		},
 		{
 			name: "Armors",
 			path: "armors",
-			icon: helmetSVG,
+			icon: <Helmet className="w-12 h-12 p-1" />,
 		},
 	];
 
 	return (
 		<div className="relative">
-			<div className="sticky top-10 grid max-md:grid-cols-3 gap-1">
-				{tabs.map((tab, index) => (
-					<Link key={tab.name} href={`/${tab.path}`} className={clsx("node md:w-[60px] h-[60px] p-3", { active: firstPath === tab.path })}>
-						<Image src={tab.icon} width={344} height={344} alt={tab.name} className="dark:invert invert-0 w-full h-full" />
+			<div className="sticky top-10 grid max-md:grid-cols-3 gap-2">
+				{tabs.map((tab) => (
+					<Link key={tab.name} href={`/${tab.path}`} className={clsx("node", { active: firstPath === tab.path })}>
+						{tab.icon}
 					</Link>
 				))}
-				<Link href="/search" className={clsx("node md:w-[60px] h-[60px] p-3", { active: firstPath === "search" })}>
-					<HiSearch className="text-black dark:text-white w-full h-full" />
+				<Link href="/search" className={clsx("node", { active: firstPath === "search" })}>
+					<Search className="w-12 h-12 p-1" />
 				</Link>
 			</div>
 		</div>

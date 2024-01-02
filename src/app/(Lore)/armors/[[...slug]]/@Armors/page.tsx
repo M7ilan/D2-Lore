@@ -6,7 +6,7 @@ import { getCollectibleDef, getPresentationNodeDef } from "@d2api/manifest-web";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-export default function ArmorsPage() {
+export default function Armors() {
 	const categoryContent = useCategory();
 	const categoryChildren = categoryContent?.children?.presentationNodes;
 
@@ -28,7 +28,7 @@ export default function ArmorsPage() {
 							const icon = bungieURL + armor?.displayProperties.icon;
 
 							return (
-								<Link href={`/inspect/${itemHash}`} key={childHash} className="node">
+								<Link href={`/inspect/${itemHash}`} key={childHash} className="armor">
 									<FullItemIcon iconSrc={icon} id={itemHash} />
 								</Link>
 							);

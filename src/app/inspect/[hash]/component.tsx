@@ -24,17 +24,17 @@ export default function Component({ params }: { params: { hash: number } }) {
 	return (
 		<div className="my-8 mx-[2%] grid grid-rows-[min-content_1fr] gap-8">
 			<div className="flex gap-4 items-center">
-				<FullItemIcon id={loreHash} iconSrc={icon} watermarkSrc={watermark} className="border-2 border-default-50" />
+				<FullItemIcon id={loreHash} iconSrc={icon} watermarkSrc={watermark} className="border-2 border-opacity-50" />
 				<div className="flex flex-col">
 					<div className="title">{name}</div>
-					<div className="text-default-50">
+					<div className="text-opacity-50">
 						{classType} {itemType}
 					</div>
 				</div>
 			</div>
 			<div className="grid grid-rows-[min-content_1fr] gap-8">
 				<div className="subtitle whitespace-pre-line">{flavorText}</div>
-				<div className="text-default-60 whitespace-pre-line">{loreDescription}</div>
+				<div className="text-opacity-60 whitespace-pre-line">{loreDescription}</div>
 			</div>
 		</div>
 	);

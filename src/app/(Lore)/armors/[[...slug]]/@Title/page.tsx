@@ -4,7 +4,7 @@ import { useArmor } from "@/src/providers/ArmorProvider";
 import { getPresentationNodeDef } from "@d2api/manifest-web";
 import { motion } from "framer-motion";
 
-export default function ClassPage() {
+export default function Title() {
 	const { node } = useArmor();
 
 	return (

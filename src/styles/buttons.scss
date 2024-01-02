@@ -1,66 +1,163 @@
 .primary-button {
-	@apply text-white bg-main px-4 py-2 shadow-sm rounded-md cursor-pointer hover:bg-[color-mix(in_srgb,_rgb(var(--background))_20%,_rgb(var(--primary-color)))] active:bg-[color-mix(in_srgb,_rgb(var(--background))_40%,_rgb(var(--primary-color)))];
+	color: white;
+	background-color: rgba(var(--primary-color));
+	padding: 8px 16px;
+	box-shadow: 0 1px 2px 0px rgba(#000, 0.1);
+	border-radius: 6px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: color-mix(in srgb, rgb(var(--background)) 20%, rgb(var(--primary-color)));
+	}
+	&:active {
+		background-color: color-mix(in srgb, rgb(var(--background)) 40%, rgb(var(--primary-color)));
+	}
 }
 
 .secondary-button {
-	@apply text-[rgb(var(--text))] bg-[rgb(var(--background))] px-4 py-2 shadow-sm rounded-md border cursor-pointer hover:bg-[color-mix(in_srgb,_rgb(var(--text))_10%,_rgb(var(--background)))] active:bg-[color-mix(in_srgb,_rgb(var(--text))_20%,_rgb(var(--background)))];
+	background-color: rgb(var(--background));
+	padding: 8px 16px;
+	box-shadow: 0 1px 2px 0px rgba(#000, 0.1);
+	border-width: 1px;
+	border-radius: 6px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: rgba(var(--foreground), 0.1);
+	}
+
+	&:active {
+		background-color: rgba(var(--foreground), 0.2);
+	}
 }
 
 .clickable-button {
-	@apply border-b-2 transition-[color,border] duration-300 hover:text-[rgb(var(--text))] hover:border-[rgb(var(--text))];
+	@apply border-b-2 transition-[color,border] duration-300 hover:text-[rgb(var(--foreground))] hover:border-[rgb(var(--foreground))];
 }
 
 .hoverable-button {
 	@apply underline decoration-dotted decoration-1 cursor-default;
 }
 
-.border-button {
-	@apply border border-[rgb(var(--border))] hover:border-[rgb(var(--text))] cursor-pointer;
-}
-
 @each $direction in top, right, bottom, left {
 	.border-button-#{$direction} {
 		border-#{$direction}-width: 2px;
-		@apply hover:border-[rgb(var(--text))];
+		@apply hover:border-[rgb(var(--foreground))];
 	}
 }
 
 .node {
-	@apply relative items-center justify-center flex bg-default-10 hover:bg-default-50 active:bg-default-50 border border-default-30 hover:border-default-100 active:border-default-100 cursor-pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 8px;
+	box-shadow: inset 0 0 0 1px rgba(var(--foreground), 0.2);
+	transition: all 300ms;
+	cursor: pointer;
+	background: rgba(var(--foreground), 0.1);
+	position: relative;
 
-	&::after {
-		content: "";
+	&:hover {
+		box-shadow: inset 0 0 0 2px rgba(var(--foreground), 1);
+		background: rgba(var(--foreground), 0.4);
+		color: rgba(var(--foreground), 1);
+	}
+
+	&::before {
+		content: " ";
 		position: absolute;
-		width: calc(100% + 12px);
-		height: calc(100% + 12px);
-		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+		top: 0;
+		left: 0;
+		width: calc(100% + 4px);
+		height: calc(100% + 4px);
+		transform: scale(1.05) translate(-2px, -2px);
+		box-shadow: 0 0 0 0px rgba(var(--foreground), 1);
+		opacity: 0.5;
 		transition: all 300ms;
 	}
 
-	&:hover::after {
-		width: calc(100% + 6px);
-		height: calc(100% + 6px);
-		box-shadow: 0 0 0 2px rgb(var(--text));
+	&:hover::before {
+		transform: scale(1) translate(-2px, -2px);
+		box-shadow: 0 0 0 2px rgba(var(--foreground), 1);
+	}
+
+	&.read {
+		background: rgba(var(--foreground), 0);
 	}
 
 	&.active {
-		@apply bg-default-50 border-default-100;
+		box-shadow: inset 0 0 0 1px rgba(var(--foreground), 1);
+		background: rgba(var(--foreground), 0.4);
+		color: rgba(var(--foreground), 1);
+
+		&:hover {
+			box-shadow: inset 0 0 0 2px rgba(var(--foreground), 1);
+		}
+
+		&.read {
+			background: rgba(var(--foreground), 0);
+		}
 	}
 }
 
 .book {
-	@apply relative transition-opacity duration-300 cursor-pointer rounded-lg overflow-hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	position: relative;
 
-	&::after {
-		content: "";
+	&::before {
+		content: " ";
 		position: absolute;
-		width: calc(100%);
-		height: calc(100%);
+		border-radius: 6px;
+		top: 0;
+		left: 0;
+		width: calc(100% + 4px);
+		height: calc(100% + 4px);
+		transform: scale(1.05) translate(-2px, -2px);
+		box-shadow: 0 0 0 0px rgba(var(--foreground), 0.5);
 		transition: all 300ms;
-		@apply inset-0;
 	}
 
-	&:hover::after {
-		@apply bg-default-20;
+	&:hover::before {
+		transform: scale(1) translate(-2px, -2px);
+		box-shadow: 0 0 0 2px rgba(var(--foreground), 1);
+	}
+}
+
+.active-book {
+	background-color: rgba(var(--foreground), 1);
+}
+
+.armor {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: inset 0 0 0 1px rgba(var(--foreground), 0.2);
+	transition: all 300ms;
+	cursor: pointer;
+	position: relative;
+
+	&:hover {
+		box-shadow: inset 0 0 0 2px rgba(var(--foreground), 1);
+		color: rgba(var(--foreground), 1);
+	}
+
+	&::before {
+		content: " ";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: calc(100% + 4px);
+		height: calc(100% + 4px);
+		transform: scale(1.05) translate(-2px, -2px);
+		box-shadow: 0 0 0 0px rgba(var(--foreground), 1);
+		transition: all 300ms;
+	}
+
+	&:hover::before {
+		transform: scale(1) translate(-2px, -2px);
+		box-shadow: 0 0 0 2px rgba(var(--foreground), 1);
 	}
 }
