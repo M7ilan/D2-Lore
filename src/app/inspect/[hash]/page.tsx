@@ -1,58 +1,41 @@
-import { Metadata } from "next";
-import Component from "./component";
-import { DestinyInventoryItemDefinition, DestinyManifest } from "bungie-api-ts/destiny2";
-import fetchData from "@/src/utils/fetchData";
+"use client";
 
-const options = {
-	headers: {
-		"X-API-Key": process.env.NEXT_PUBLIC_API_KEY as string,
-	},
-};
-
-async function fetchItemData(hash: number): Promise<DestinyInventoryItemDefinition> {
-	const destinyManifest: DestinyManifest = (await fetchData("https://www.bungie.net/Platform/Destiny2/Manifest/", options)).Response;
-	const definition = destinyManifest.jsonWorldComponentContentPaths.en["DestinyInventoryItemDefinition"];
-	const InventoryItemDefinition = await fetchData(`https://www.bungie.net${definition}`, options);
-
-	return InventoryItemDefinition[hash];
-}
+import FullItemIcon from "@/src/components/FullItemIcon";
+import { DestinyClass } from "@/src/types/DestinyClass";
+import { getInventoryItemDef, getLoreDef } from "@d2api/manifest";
 
 export default function InspectPage({ params }: { params: { hash: number } }) {
 	const hash = params.hash;
-
-	return <Component params={{ hash }} />;
-}
-
-export async function generateMetadata({ params }: { params: { hash: number } }): Promise<Metadata> {
-	const hash = params.hash;
-	const item = await fetchItemData(hash);
-
+	const item = getInventoryItemDef(hash);
+	const lore = getLoreDef(hash);
 	if (!item) throw new Error("Item not found");
 
+	const bungieURL = "https://www.bungie.net";
 	const name = item.displayProperties.name;
+	const icon = bungieURL + item.displayProperties.icon;
+	const watermark = bungieURL + item.iconWatermark;
+	const itemType = item.itemTypeDisplayName;
+	const classType = DestinyClass[item.classType];
 	const flavorText = item.flavorText;
 
-	return {
-		title: name,
-		description: flavorText,
-	};
+	const loreHash = item.loreHash || 0;
+	const loreDescription = lore?.displayProperties.description;
+
+	return (
+		<div className="my-8 mx-[2%] grid grid-rows-[min-content_1fr] gap-8">
+			<div className="flex gap-4 items-center">
+				<FullItemIcon id={loreHash} iconSrc={icon} watermarkSrc={watermark} className="border-2 border-opacity-50" />
+				<div className="flex flex-col">
+					<div className="title">{name}</div>
+					<div className="text-opacity-50">
+						{classType} {itemType}
+					</div>
+				</div>
+			</div>
+			<div className="grid grid-rows-[min-content_1fr] gap-8">
+				<div className="subtitle whitespace-pre-line">{flavorText}</div>
+				<div className="text-opacity-60 whitespace-pre-line">{loreDescription}</div>
+			</div>
+		</div>
+	);
 }
-
-
-// IMPORTANT THERE'S MORE THAN 25K ITEM.
-
-// Generate static pages for each item for quick access
-// export async function generateStaticParams() {
-// 	const options = {
-// 		headers: {
-// 			"X-API-Key": process.env.NEXT_PUBLIC_API_KEY as string,
-// 		},
-// 	};
-
-// 	const destinyManifest: DestinyManifest = (await fetchData("https://www.bungie.net/Platform/Destiny2/Manifest/", options)).Response;
-// 	const components = destinyManifest.jsonWorldComponentContentPaths.en;
-// 	const InventoryItemDefinition = await fetchData(`https://www.bungie.net${components["DestinyInventoryItemDefinition"]}`, options);
-
-// 	const hashes = Object.keys(InventoryItemDefinition);
-// 	return hashes.map((hash) => ({ hash }));
-// }

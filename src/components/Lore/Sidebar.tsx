@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Book from "@/src/icons/Book";
 import Helmet from "@/src/icons/Helmet";
-import Search from "@/src/icons/Search";
+// import Search from "@/src/icons/Search";
 
 export default function Sidebar() {
 	const path = usePathname();
@@ -32,9 +32,9 @@ export default function Sidebar() {
 						{tab.icon}
 					</Link>
 				))}
-				<Link href="/search" className={clsx("node", { active: firstPath === "search" })}>
+				{/* <Link href="/search" className={clsx("node", { active: firstPath === "search" })}>
 					<Search className="w-12 h-12 p-1" />
-				</Link>
+				</Link> */}
 			</div>
 		</div>
 	);

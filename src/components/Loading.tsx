@@ -1,7 +1,7 @@
 import React from "react";
 import LoadingIcon from "./LoadingIcon";
 import { motion } from "framer-motion";
-import Logo from "../icons/Logo";
+import Logo from "@/src/icons/Logo";
 
 export default function Loading() {
 	return (
@@ -10,7 +10,7 @@ export default function Loading() {
 				<Logo className="w-32 h-32 p-4 drop-shadow-xl text-opacity-100" />
 				<div className="flex center gap-4">
 					<LoadingIcon size={32} />
-					<div className="font-bold">Loading Manifest...</div>
+					<div className="font-bold text-opacity-100">Loading Manifest...</div>
 				</div>
 			</div>
 		</motion.div>

@@ -13,17 +13,12 @@ export default function Home() {
 						</Link>
 					</div>
 					<div className="text-center">
-						<h1 className="font-bold tracking-tight header">
-							Welcome to D2 Lore
-						</h1>
+						<h1 className="font-bold tracking-tight header">Welcome to D2 Lore</h1>
 						<p className="mt-6 leading-8 text-opacity-60">The Destiny 2 Lore Library.</p>
 						<div className="mt-10 flex items-center justify-center gap-x-6">
 							<Link href="/books" className="primary-button">
 								Discover the Legends
 							</Link>
-							<Link href="/about" className="secondary-button">
-							Learn more
-						</Link>
 						</div>
 					</div>
 				</div>
