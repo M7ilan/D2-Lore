@@ -26,7 +26,7 @@ export default function Sidebar() {
 
 	return (
 		<div className="relative">
-			<div className="sticky top-10 grid max-md:grid-cols-3 gap-2">
+			<div className="sticky top-10 grid max-md:grid-cols-2 gap-2">
 				{tabs.map((tab) => (
 					<Link key={tab.name} href={`/${tab.path}`} className={clsx("node", { active: firstPath === tab.path })}>
 						{tab.icon}

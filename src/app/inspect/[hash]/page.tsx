@@ -10,10 +10,9 @@ export default function InspectPage({ params }: { params: { hash: number } }) {
 	const lore = getLoreDef(hash);
 	if (!item) throw new Error("Item not found");
 
-	const bungieURL = "https://www.bungie.net";
 	const name = item.displayProperties.name;
-	const icon = bungieURL + item.displayProperties.icon;
-	const watermark = bungieURL + item.iconWatermark;
+	const icon = process.env.NEXT_PUBLIC_BUNGIE_URL + item.displayProperties.icon;
+	const watermark = item.iconWatermark;
 	const itemType = item.itemTypeDisplayName;
 	const classType = DestinyClass[item.classType];
 	const flavorText = item.flavorText;
