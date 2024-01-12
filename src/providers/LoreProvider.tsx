@@ -47,7 +47,7 @@ export default function LoreProvider({ children }: { children: React.ReactNode }
 	return <LoreContext.Provider value={{ node, setNode, book, setBook, record, setRecord }}>{children}</LoreContext.Provider>;
 }
 
-export const useLore = (): LoreContextProps => {
+export function useLore(): LoreContextProps {
 	const context = useContext(LoreContext);
 	if (!context) {
 		throw new Error("useLore must be used within a LoreProvider");
